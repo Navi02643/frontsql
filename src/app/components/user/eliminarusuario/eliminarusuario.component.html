@@ -1,0 +1,68 @@
+<div class="container pt-2">
+  <div class="jumbotron m-3">
+    <div class="text-center">
+      <h1>Eliminar o reactivar usuarios</h1>
+    </div>
+    <div class="pt-2" *ngIf="this.SA == 1">
+      <table class="table table-hover border border-dark">
+        <thead class="table-dark">
+          <tr class="text-center">
+            <th scope="col">Nombre del usuario</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Reactivar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody
+          class="bg-light"
+          *ngFor="let user of listainactivos.rows; count as c"
+        >
+          <tr>
+            <td>
+              {{ user.usuarionombres }} {{ user.usuarioapellidoP }}
+              <span
+                *ngIf="
+                  user.usuarioapellidoM == 'X' || user.usuarioapellidoM == 'x';
+                  else conapellido
+                "
+              ></span>
+              <ng-template #conapellido
+                ><span>{{ user.usuarioapellidoM }}</span></ng-template
+              >
+            </td>
+            <td>{{ user.usuarioemail }}</td>
+            <td>{{ user.usuariotelefono }}</td>
+            <td>{{ user.rolesnombre }}</td>
+            <td>{{ user.cargonombre }}</td>
+            <td>
+              <button
+                class="btn btn-block btn-outline-success"
+                (click)="reactivarINA(user.IDusuario)"
+              >
+                Reactivar
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-block btn-outline-danger"
+                (click)="borrarINA(user.IDusuario)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pt-2" *ngIf="this.SA == 0">
+      <div class="row text-center">
+        <div><h3 class="border border-danger p-3" style="color: red;">Sin usuarios inactivos</h3></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

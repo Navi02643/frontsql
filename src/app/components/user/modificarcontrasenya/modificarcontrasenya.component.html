@@ -1,0 +1,48 @@
+<form [formGroup]="formulariocontrasenia" (ngSubmit)="enviar()">
+  <form>
+    <div class="mb-3">
+      <label for="passold" class="form-label"
+        >Ingresa tu contraseña actual</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="passold"
+        formControlName="passold"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="passnew" class="form-label"
+        >Ingresa tu nueva contraseña</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="passnew"
+        formControlName="passnew"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="passconf" class="form-label"
+        >Confirma tu nueva contraseña</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="passconf"
+        formControlName="passcon"
+      />
+    </div>
+    <div class="text-center">
+      <button
+        [disabled]="!formulariocontrasenia.valid"
+        type="submit"
+        class="btn btn-outline-success"
+      >
+        Confirmar
+      </button>
+    </div>
+  </form>
+</form>
+
+<router-outlet></router-outlet>
