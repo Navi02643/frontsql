@@ -14,12 +14,13 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(user: UserI): Observable<JwtResponseI> {
+    console.log(user)
     return this.httpClient.post<JwtResponseI>(`${this.AUTH_SERVER}/login`,
     user).pipe(tap(
       (res:JwtResponseI) => {
         if (res) {
           //guardar token
-          this.saveToken(res.Info.usuarionombres, res.Info.expiresIn);
+          this.saveToken(res.Info.usuarionombres);
         }
       })
     );
@@ -31,9 +32,8 @@ export class AuthService {
     localStorage.removeItem("EXPIRES_IN");
   }
 
-  private saveToken(token:string, expiresIn: string): void {
-    localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("EXPIRES_IN", expiresIn);
+  private saveToken(token:string): void {
+    localStorage.setItem("USER", token);
     this.token = token;
   }
 
