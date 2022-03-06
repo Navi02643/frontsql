@@ -1,6 +1,5 @@
 export interface UserP {
-  IDusuario: number,
-  passold: string,
-  passnew: string,
-  passconf: string
+  usuariocontrasenyaold: string,
+  usuariocontrasenyanew: string,
+  usuariocontrasenyaconf: string
 }

@@ -8,13 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/header/navbar/navbar.component';
 import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component';
+import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     EliminarusuarioComponent,
-    ModificarcontrasenyaComponent
+    ModificarcontrasenyaComponent,
+    ModificarusuarioComponent
   ],
   imports: [
     BrowserModule,
