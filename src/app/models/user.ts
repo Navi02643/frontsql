@@ -1,7 +1,7 @@
-export interface UserI {
-    IDusuario: number,
-    usuarionombres: string,
-    usuarioemail: string,
-    usuariocontrasenya: string
+export class UserI {
+    IDusuario: any;
+    usuarionombres: string;
+    usuarioemail: string;
+    usuariocontrasenya: string;
 
 }

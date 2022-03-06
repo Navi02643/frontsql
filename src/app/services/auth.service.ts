@@ -20,7 +20,7 @@ export class AuthService {
       (res:JwtResponseI) => {
         if (res) {
           //guardar token
-          this.saveToken(res.Info.usuarionombres);
+          this.saveToken(res.Info.accessToken, res.Info.IDusuario, res.Info.usuarionombres);
         }
       })
     );
@@ -29,11 +29,14 @@ export class AuthService {
   logout(){
     this.token = '';
     localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
+    localStorage.removeItem("ID");
+    localStorage.removeItem("USER");
   }
 
-  private saveToken(token:string): void {
-    localStorage.setItem("USER", token);
+  private saveToken(token:string, IDusuario: any, usuarionombres:string): void {
+    localStorage.setItem("ACCESS_TOKEN", token);
+    localStorage.setItem("ID", IDusuario);
+    localStorage.setItem("USER", usuarionombres);
     this.token = token;
   }
 

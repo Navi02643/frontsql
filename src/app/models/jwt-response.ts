@@ -1,6 +1,6 @@
 export interface JwtResponseI {
     Info:{
-        IDusuario: number,
+        IDusuario: any,
         usuarionombres: string,
         usuarioemail: string,
         accessToken: string,

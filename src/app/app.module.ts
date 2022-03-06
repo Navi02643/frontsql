@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/header/navbar/navbar.component';
 import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ModificarcontrasenyaComponent } from './components/user/modificarcontra
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
