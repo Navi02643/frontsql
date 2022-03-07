@@ -3,11 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditarTareaComponent } from './tareas/editar-tarea/editar-tarea.component';
 import { EliminarTareaComponent } from './tareas/eliminar-tarea/eliminar-tarea.component';
 import { RegistrarTareaComponent } from './tareas/registrar-tarea/registrar-tarea.component';
-
+import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
+import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component'
+import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component';
+import { NavbarComponent } from 'src/app/components/header/navbar/navbar.component';
+import { ModificarcargorolComponent } from 'src/app/components/user/modificarcargorol/modificarcargorol.component';
+import { AltausuarioComponent } from 'src/app/components/user/altausuario/altausuario.component'
 
 const routes: Routes = [
-  {path: '' , redirectTo: '/auth',pathMatch: 'full'},
-  {path: 'auth', loadChildren: () => import ('./auth/auth.module').then(x => x.AuthModule) },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'auth', loadChildren: () => import ('./auth/auth.module').then(x => x.AuthModule) },
+  { path: 'navbar',component: NavbarComponent,pathMatch: 'full' },
+  { path: 'deleteuser',component: EliminarusuarioComponent,pathMatch: 'full' },
+  { path: 'changepass',component: ModificarcontrasenyaComponent,pathMatch:'full' },
+  { path: 'changeuserdata',component: ModificarusuarioComponent,pathMatch: 'full' },
+  { path: 'changerole',component: ModificarcargorolComponent,pathMatch: 'full' },
+  { path: 'register',component: AltausuarioComponent,pathMatch: 'full'},
+  //MÓDULO TAREAS:
   {path: 'registrarTarea', component: RegistrarTareaComponent, pathMatch:'full'},
   {path: 'eliminarTarea', component: EliminarTareaComponent, pathMatch:'full'},
   {path: 'editarTarea', component: EditarTareaComponent, pathMatch:'full'}
@@ -15,6 +27,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

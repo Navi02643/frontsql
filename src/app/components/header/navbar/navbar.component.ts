@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  userInfo: any = [];
+  IDusuario = localStorage.getItem('ID');
+  IDcargo = Number(localStorage.getItem('CARGO'))
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    this.validardatos();
+  }
+
+  validardatos(){
+    if(this.IDusuario == null){
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login')
   }
 
 }

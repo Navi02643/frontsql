@@ -11,13 +11,11 @@
             Usuario
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Crear cuenta</a></li>
-            <li><a class="dropdown-item" href="#">Iniciar sesión</a></li>
-            <li><a class="dropdown-item" href="#">Editar Usuario</a></li>
-            <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
-            <li><a class="dropdown-item" href="#">Eliminar cuenta</a></li>
-
-
+            <li><a class="dropdown-item" routerLink="/register">Crear cuenta</a></li>
+            <li><a class="dropdown-item" routerLink="/changeuserdata">Editar Usuario</a></li>
+            <li><a class="dropdown-item" routerLink="/changepass">Cambiar contraseña</a></li>
+            <li *ngIf="IDcargo==1"><a class="dropdown-item" routerLink="/deleteuser">Eliminar cuenta</a></li>
+            <li *ngIf="IDcargo==1"><a class="dropdown-item" routerLink="/changerole">Editar roles/cargos de usuarios</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -52,8 +50,11 @@
       </ul>
       </div>
       <div class="d-flex align-items-end">
+        <h2 class="navbar-brand">{{this.userInfo}}</h2>
         <img src="https://www.creativefabrica.com/wp-content/uploads/2019/02/User-icon-EPS10-by-Kanggraphic-580x386.jpg" width="50px" style="margin: 4px; border-radius: 45%;" alt="">
-        <button type="button" class="btn btn-danger" style="margin: 4px;">Salir</button>
+        <button type="button" class="btn btn-danger" style="margin: 4px;" (click)="logout()" >Salir</button>
     </div>
   </div>
 </nav>
+
+<router-outlet></router-outlet>
