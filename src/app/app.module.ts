@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/header/navbar/navbar.component';
 import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component';
 import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ModificarusuarioComponent } from './components/user/modificarusuario/mo
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

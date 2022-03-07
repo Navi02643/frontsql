@@ -6,6 +6,7 @@ import { ModificarusuarioComponent } from './components/user/modificarusuario/mo
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login',component: LoginComponent,pathMatch: 'full'},
   { path: 'auth', loadChildren: () => import ('./auth/auth.module').then(x => x.AuthModule) },
   { path: 'deleteuser',component: EliminarusuarioComponent,pathMatch: 'full' },
   { path: 'changepass',component: ModificarcontrasenyaComponent,pathMatch:'full' },

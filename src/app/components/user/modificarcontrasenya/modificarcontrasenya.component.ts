@@ -20,6 +20,7 @@ export class ModificarcontrasenyaComponent implements OnInit {
 
   constructor(private userservice: UserService, private router: Router) {}
 
+
   ngOnInit(): void {
     this.crearform();
   }
