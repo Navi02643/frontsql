@@ -14,12 +14,13 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(user: UserI): Observable<JwtResponseI> {
+    console.log(user)
     return this.httpClient.post<JwtResponseI>(`${this.AUTH_SERVER}/login`,
     user).pipe(tap(
       (res:JwtResponseI) => {
         if (res) {
           //guardar token
-          this.saveToken(res.Info.usuarionombres, res.Info.expiresIn);
+          this.saveToken(res.Info.accessToken, res.Info.IDusuario, res.Info.usuarionombres, res.Info.usuarioapellidoP ,res.Info.usuarioapellidoM);
         }
       })
     );
@@ -28,12 +29,18 @@ export class AuthService {
   logout(){
     this.token = '';
     localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
+    localStorage.removeItem("ID");
+    localStorage.removeItem("USERNAME");
+    localStorage.removeItem("USERAP1");
+    localStorage.removeItem("USERAP2");
   }
 
-  private saveToken(token:string, expiresIn: string): void {
+  private saveToken(token:string, IDusuario: any, usuarionombres:string,usuarioapellidoP: string,usuarioapellidoM: string): void {
     localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("EXPIRES_IN", expiresIn);
+    localStorage.setItem("ID", IDusuario);
+    localStorage.setItem("USERNAME", usuarionombres);
+    localStorage.setItem("USERAP1", usuarioapellidoP);
+    localStorage.setItem("USERAP2", usuarioapellidoM);
     this.token = token;
   }
 

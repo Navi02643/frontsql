@@ -1,15 +1,60 @@
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Gestión de Proyectos UTA</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Gestión de Proyectos UTA.</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-secondary" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 6px">
+            Usuario
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Crear cuenta</a></li>
+            <li><a class="dropdown-item" href="/auth/login">Iniciar sesión</a></li>
+            <li><a class="dropdown-item" href="#">Editar Usuario</a></li>
+            <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar cuenta</a></li>
+
+
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-secondary" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 6px">
+            Proyectos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Registrar Proyecto</a></li>
+            <li><a class="dropdown-item" href="#">Editar Proyecto</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar Proyecto</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-secondary" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 6px">
+            Herramientas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Archivo Log</a></li>
+            <li><a class="dropdown-item" href="#">Historial</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-secondary" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 6px">
+            Tareas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Registrar tarea</a></li>
+            <li><a class="dropdown-item" href="#">Editar tarea</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar tarea</a></li>
+          </ul>
+        </li>
+      </ul>
       </div>
+      <div class="d-flex align-items-end">
+        <h2 class="navbar-brand">{{this.userInfo}}</h2>
+        <img src="https://www.creativefabrica.com/wp-content/uploads/2019/02/User-icon-EPS10-by-Kanggraphic-580x386.jpg" width="50px" style="margin: 4px; border-radius: 45%;" alt="">
+        <button type="button" class="btn btn-danger" style="margin: 4px;" (click)="logout()" >Salir</button>
     </div>
-  </nav>
+  </div>
+</nav>
