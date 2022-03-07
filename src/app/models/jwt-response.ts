@@ -7,5 +7,6 @@ export interface JwtResponseI {
         usuarioapellidoP: string,
         usuarioapellidoM: string,
         expiresIn: string,
+        IDrol: any,
     }
 }

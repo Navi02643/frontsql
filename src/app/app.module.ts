@@ -10,6 +10,8 @@ import { EliminarusuarioComponent } from './components/user/eliminarusuario/elim
 import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component';
 import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component';
 import { AuthService } from './services/auth.service';
+import { ModificarcargorolComponent } from './components/user/modificarcargorol/modificarcargorol.component';
+import { AltausuarioComponent } from './components/user/altausuario/altausuario.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { AuthService } from './services/auth.service';
     NavbarComponent,
     EliminarusuarioComponent,
     ModificarcontrasenyaComponent,
-    ModificarusuarioComponent
+    ModificarusuarioComponent,
+    ModificarcargorolComponent,
+    AltausuarioComponent
   ],
   imports: [
     BrowserModule,

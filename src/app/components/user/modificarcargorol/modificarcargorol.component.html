@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div class="container pt-2">
+  <div class="jumbotron m-3">
+    <div class="text-center">
+      <h1>Eliminar o reactivar usuarios</h1>
+    </div>
+    <form [formGroup]="formulariorolescargos">
+      <div class="mb-3">
+        <label for="IDusuario" class="form-label">Usuario</label>
+        <select
+          (change)="data()"
+          class="form-select"
+          name="IDusuario"
+          id="IDusuario"
+          formControlName="IDusuario"
+        >
+          <option
+            *ngFor="let lista of listausuarios.rows; count as c"
+            ngValue="{{ lista.IDusuario }}"
+          >
+            {{ lista.usuarionombres }} {{ lista.usuarioapellidoP }}
+            {{ lista.usuarioapellidoM }}
+          </option>
+        </select>
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariorolescargos.get('IDusuario')?.invalid &&
+            this.formulariorolescargos.get('IDusuario')?.touched
+          "
+          >Se requiere seleccionar un usuario</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="IDcargo" class="form-label">Cargo</label>
+        <select
+          class="form-select"
+          name="IDcargo"
+          id="IDcargo"
+          formControlName="IDcargo"
+          ngModel="{{this.userdata.IDcargo}}"
+        >
+          <option
+            *ngFor="let lista of listacargos.rows; count as c"
+            ngValue="{{ lista.IDcargo }}"
+          >
+            {{ lista.cargonombre }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="IDrol" class="form-label">Rol</label>
+        <select
+          class="form-select"
+          name="IDrol"
+          id="IDrol"
+          formControlName="IDrol"
+          ngModel="{{this.userdata.IDrol}}"
+        >
+          <option
+            *ngFor="let lista of listaroles.rows; count as c"
+            ngValue="{{ lista.IDroles }}"
+          >
+            {{ lista.rolesnombre }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="usuariosalario" class="form-label">Salario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usuariosalario"
+          formControlName="usuariosalario"
+          placeholder="{{this.userdata.usuariosalario}}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="usuarioestado" class="form-label">Activar/Inactivar</label>
+        <select
+          class="form-select"
+          name="usuarioestado"
+          id="usuarioestado"
+          formControlName="usuarioestado"
+          ngModel="{{this.userdata.usuarioestado}}"
+        >
+          <option ngValue="1">Activo</option>
+          <option ngValue="0">Inactivo</option>
+        </select>
+      </div>
+      <div class="text-center">
+        <input
+          [disabled]="!formulariorolescargos.valid"
+          (click)="enviar()"
+          class="btn btn-outline-success"
+          value="Confirmar"
+          type="button"
+        />
+      </div>
+    </form>
+  </div>
+</div>

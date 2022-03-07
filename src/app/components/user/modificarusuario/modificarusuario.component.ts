@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { RolesService } from 'src/app/services/roles.service';
-import { ChargesService } from 'src/app/services/charges.service';
 
 import Swal from 'sweetalert2';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modificarusuario',
@@ -13,48 +11,47 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./modificarusuario.component.css'],
 })
 export class ModificarusuarioComponent implements OnInit {
-
-  IDusuario=1;
-  listaroles: any = [];
-  listacargos: any = [];
-  editvalue: any=[];
+  IDusuario = localStorage.getItem('ID');
+  editvalue: any = [];
   formulariousuarioedit: FormGroup;
+  userdata: any={
+    usuarionombres: "",
+    usuarioapellidoP: "",
+    usuarioapellidoM: "",
+    usuarioemail: "",
+    usuariotelefono: "",
+  };
   msg: any = '';
 
-  constructor(
-    private userservice: UserService,
-    private roleservices: RolesService,
-    private chargesservie: ChargesService
-  ) {}
+  constructor(private userservice: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.validardatos();
     this.createform();
-    this.getrole();
-    this.getcharge();
+    this.data();
   }
 
-  createform(){
-  this.formulariousuarioedit = new FormGroup({
-    usuarionombres: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioapellidoP: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioapellidoM: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioemail: new FormControl('',Validators.email),
-      usuariotelefono: new FormControl('',Validators.pattern('^[0-9]*$')),
-      IDrol: new FormControl('',Validators.required),
-      IDcargo: new FormControl('',Validators.required),
-  });
-  }
-
-  getrole(){
-    this.roleservices.getrolesACT().subscribe(value=>{
-      this.listaroles = value;
+  data(){
+    this.userservice.getuseresp(this.IDusuario).subscribe(value=>{
+      this.userdata = value;
+      this.userdata =  this.userdata.rows;
     })
   }
 
-  getcharge(){
-    this.chargesservie.getcargosACT().subscribe(value=>{
-      this.listacargos = value;
-    })
+  validardatos() {
+    if (this.IDusuario == null) {
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
+  createform() {
+    this.formulariousuarioedit = new FormGroup({
+      usuarionombres: new FormControl('', Validators.pattern('^[a-zA-Z ]*$')),
+      usuarioapellidoP: new FormControl('', Validators.pattern('^[a-zA-Z ]*$')),
+      usuarioapellidoM: new FormControl('', Validators.pattern('^[a-zA-Z ]*$')),
+      usuarioemail: new FormControl('', Validators.email),
+      usuariotelefono: new FormControl('', Validators.pattern('^[0-9]*$')),
+    });
   }
 
   enviar() {
@@ -78,13 +75,15 @@ export class ModificarusuarioComponent implements OnInit {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          this.userservice.putdatauser(this.IDusuario,this.editvalue).subscribe((value) => {
-            this.msg = value;
-            if (this.msg.err == false) {
-              swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
-              this.ngOnInit();
-            }
-          });
+          this.userservice
+            .putdatauser(this.IDusuario, this.editvalue)
+            .subscribe((value) => {
+              this.msg = value;
+              if (this.msg.err == false) {
+                swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
+                this.ngOnInit();
+              }
+            });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
             'Cancelado',
