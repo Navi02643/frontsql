@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChargesService } from 'src/app/services/charges.service';
 import { RolesService } from 'src/app/services/roles.service';
 
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class AltausuarioComponent implements OnInit {
   IDusuario = localStorage.getItem('ID');
+  IDrolLS = Number(localStorage.getItem('CARGO'));
   formulariouser: FormGroup;
   registro: any = [];
   listaroles: any = [];
@@ -20,7 +22,8 @@ export class AltausuarioComponent implements OnInit {
   constructor(
     private roleservices: RolesService,
     private chargesservie: ChargesService,
-    private router: Router
+    private router: Router,
+    private authservice: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +34,8 @@ export class AltausuarioComponent implements OnInit {
   }
 
   validardatos() {
-    if (this.IDusuario == null) {
+    if (this.IDusuario == null || this.IDrolLS != 1) {
+      this.authservice.logout();
       this.router.navigate(['/auth/login']);
     }
   }

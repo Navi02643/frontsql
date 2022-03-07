@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 import Swal from 'sweetalert2';
 
@@ -10,20 +11,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./eliminarusuario.component.css'],
 })
 export class EliminarusuarioComponent implements OnInit {
-
   IDusuario = localStorage.getItem('ID');
+  IDrolLS = Number(localStorage.getItem('CARGO'));
   listainactivos: any = [];
   SA: any = '';
   msg: any = '';
-  constructor(private userservice: UserService,private router: Router) {}
+  constructor(
+    private userservice: UserService,
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.validardatos();
     this.listaINA();
   }
 
-  validardatos(){
-    if(this.IDusuario == null){
+  validardatos() {
+    if (this.IDusuario == null || this.IDrolLS != 1) {
+      this.authservice.logout();
       this.router.navigate(['/auth/login']);
     }
   }

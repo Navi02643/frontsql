@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChargesService } from 'src/app/services/charges.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ModificarcargorolComponent implements OnInit {
   IDusuario2 = localStorage.getItem('ID');
+  IDrolLS = Number(localStorage.getItem('CARGO'));
   formulariorolescargos: FormGroup;
   listausuarios: any = [];
   listaroles: any = [];
@@ -32,7 +34,8 @@ export class ModificarcargorolComponent implements OnInit {
     private roleservices: RolesService,
     private chargesservie: ChargesService,
     private userservice: UserService,
-    private router: Router
+    private router: Router,
+    private authservice: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +47,8 @@ export class ModificarcargorolComponent implements OnInit {
   }
 
   validardatos(){
-    if(this.IDusuario2 == null){
+    if(this.IDusuario2 == null || this.IDrolLS != 1){
+      this.authservice.logout();
       this.router.navigate(['/auth/login']);
     }
   }
