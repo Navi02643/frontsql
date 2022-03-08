@@ -14,6 +14,22 @@
           formControlName="usuarionombres"
         />
       </div>
+      <span
+        class="alert alert-danger"
+        *ngIf="
+          this.formulariouser.get('usuarionombres')?.hasError('required') &&
+          this.formulariouser.get('usuarionombres')?.touched
+        "
+        >Es necesario poner tu nombre</span
+      >
+      <span
+        class="alert alert-danger"
+        *ngIf="
+          this.formulariouser.get('usuarionombres')?.hasError('pattern') &&
+          this.formulariouser.get('usuarionombres')?.touched
+        "
+        >Ingresaste un caracter no valido
+      </span>
       <div class="mb-3">
         <label for="usuarioapellidoP" class="form-label">Primer Apellido</label>
         <input
@@ -22,9 +38,27 @@
           id="usuarioapellidoP"
           formControlName="usuarioapellidoP"
         />
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuarioapellidoP')?.hasError('required') &&
+            this.formulariouser.get('usuarioapellidoP')?.touched
+          "
+          >Es necesario poner tu primer apellido</span
+        >
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuarioapellidoP')?.hasError('pattern') &&
+            this.formulariouser.get('usuarioapellidoP')?.touched
+          "
+          >Ingresaste un caracter no valido
+        </span>
       </div>
       <div class="mb-3">
-        <label for="usuarioapellidoM" class="form-label">Segundo Apellido</label>
+        <label for="usuarioapellidoM" class="form-label"
+          >Segundo Apellido</label
+        >
         <input
           type="text"
           class="form-control"
@@ -32,7 +66,17 @@
           formControlName="usuarioapellidoM"
           aria-describedby="usuarioapellidoMhelp"
         />
-        <div id="usuarioapellidoMhelp" class="form-text">Si no se tiene un segundo apellido ingrese una 'X'</div>
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuarioapellidoM')?.hasError('pattern') &&
+            this.formulariouser.get('usuarioapellidoM')?.touched
+          "
+          >Ingresaste un caracter no valido
+        </span>
+        <div id="usuarioapellidoMhelp" class="form-text">
+          Si no se tiene un segundo apellido ingrese una 'X'
+        </div>
       </div>
       <div class="mb-3">
         <label for="usuarioemail" class="form-label">Correo electronico</label>
@@ -42,15 +86,41 @@
           id="usuarioemail"
           formControlName="usuarioemail"
         />
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuarioemail')?.hasError('required') &&
+            this.formulariouser.get('usuarioemail')?.touched
+          "
+          >Es necesario poner un correo</span
+        >
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuarioemail')?.hasError('email') &&
+            this.formulariouser.get('usuarioemail')?.touched
+          "
+          >Ingresa un correo valido
+        </span>
       </div>
       <div class="mb-3">
-        <label for="usuariotelefono" class="form-label">Numero de telefono</label>
+        <label for="usuariotelefono" class="form-label"
+          >Numero de telefono</label
+        >
         <input
           type="text"
           class="form-control"
           id="usuariotelefono"
           formControlName="usuariotelefono"
         />
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuariotelefono')?.hasError('pattern') &&
+            this.formulariouser.get('usuariotelefono')?.touched
+          "
+          >El numero de telefono es numerico
+        </span>
       </div>
       <div class="mb-3">
         <label for="IDcargo" class="form-label">Cargo</label>
@@ -67,6 +137,14 @@
             {{ lista.cargonombre }}
           </option>
         </select>
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('IDcargo')?.hasError('required') &&
+            this.formulariouser.get('IDcargo')?.touched
+          "
+          >Se requiere un cargo
+        </span>
       </div>
       <div class="mb-3">
         <label for="IDrol" class="form-label">Rol</label>
@@ -83,6 +161,14 @@
             {{ lista.rolesnombre }}
           </option>
         </select>
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('IDrol')?.hasError('required') &&
+            this.formulariouser.get('IDrol')?.touched
+          "
+          >Se requiere un rol
+        </span>
       </div>
       <div class="mb-3">
         <label for="usuariocontrasenya" class="form-label"
@@ -94,17 +180,41 @@
           id="usuariocontrasenya"
           formControlName="usuariocontrasenya"
         />
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser
+              .get('usuariocontrasenya')
+              ?.hasError('required') &&
+            this.formulariouser.get('usuariocontrasenya')?.touched
+          "
+          >Se requiere una contraseña
+        </span>
       </div>
       <div class="mb-3">
-        <label for="usuariosalario" class="form-label"
-          >Salario</label
-        >
+        <label for="usuariosalario" class="form-label">Salario</label>
         <input
-          type="password"
+          type="text"
           class="form-control"
           id="usuariosalario"
           formControlName="usuariosalario"
         />
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuariosalario')?.hasError('required') &&
+            this.formulariouser.get('usuariosalario')?.touched
+          "
+          >Es necesario poner el salario
+        </span>
+        <span
+          class="alert alert-danger"
+          *ngIf="
+            this.formulariouser.get('usuariosalario')?.hasError('pattern') &&
+            this.formulariouser.get('usuariosalario')?.touched
+          "
+          >El salario es numerico</span
+        >
       </div>
       <div class="text-center">
         <input

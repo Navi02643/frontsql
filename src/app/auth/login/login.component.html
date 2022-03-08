@@ -1,27 +1,41 @@
 <div class="container">
   <div class="card border-dark mb-3">
     <div class="card-body">
-      <form #frmLogin="ngForm" class="login-container" (ngSubmit)="onLogin(frmLogin)">
-
+      <form
+        #frmLogin="ngForm"
+        class="login-container"
+        (ngSubmit)="onLogin(frmLogin)"
+      >
         <div class="form-floating mb-3">
-          <input type="email" name="usuarioemail" class="form-control" ngModel required>
-          <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
+          <input
+            type="email"
+            name="usuarioemail"
+            class="form-control"
+            ngModel
+            required
+          />
+          <label for="exampleInputEmail1" class="form-label"
+            >Correo Electronico</label
+          >
         </div>
-
         <div class="form-floating mb-3">
-          <input type="password" name="usuariocontrasenya" class="form-control" ngModel required>
-          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            name="usuariocontrasenya"
+            class="form-control"
+            ngModel
+            required
+          />
+          <label for="exampleInputPassword1" class="form-label"
+            >Contraseña</label
+          >
         </div>
-          
         <div class="d-grid gap-2">
-        <button type="submit" value="Send" class="btn btn-dark btn-lg">Log In</button>
+          <button type="submit" value="Send" class="btn btn-dark btn-lg">
+            Ingresar
+          </button>
         </div>
-
-        <br>
-        <hr>
-        <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" value="Send" class="btn btn-dark">Crear Nueva Cuenta</button>
-        </div>
+        <br />
       </form>
     </div>
   </div>
