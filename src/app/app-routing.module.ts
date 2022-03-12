@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
 import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
 import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component'
 import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component'
