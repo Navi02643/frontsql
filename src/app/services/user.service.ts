@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { UserP } from '../models/userpass';
-import { UserData } from '../models/userdata'
+import { UserData } from '../models/userdata';
+import { UserRC } from '../models/userrole';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,18 @@ export class UserService {
   url = 'http://localhost:5000/api/usuario';
 
   constructor(private http: HttpClient) { }
+
+  getuseresp(IDusuario: any){
+    return this.http.get(`${this.url}/user?IDusuario=${IDusuario}`)
+  }
+
+  getuserall(){
+    return this.http.get(this.url)
+  }
+
+  getuserACT(){
+    return this.http.get(`${this.url}/ACT`)
+  }
 
   getuserINA(){
     return this.http.get(`${this.url}/INA`);
@@ -31,6 +44,10 @@ export class UserService {
 
   putpassword(IDusuario: any,user: UserP){
     return this.http.put(`${this.url}/pass?IDusuario=${IDusuario}`,user);
+  }
+
+  putrole(IDusuario: any,user: UserRC){
+    return this.http.put(`${this.url}/CR?IDusuario=${IDusuario}`,user);
   }
 
 }

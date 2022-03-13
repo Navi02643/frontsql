@@ -11,23 +11,26 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
 
   userInfo: any = [];
-  
+  IDusuario = localStorage.getItem('ID');
+  IDcargo = Number(localStorage.getItem('CARGO'))
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userInfo = localStorage.getItem("USERNAME");
     console.log("User Logueado: ",this.userInfo);
+    this.validardatos();
+  }
+
+  validardatos(){
+    if(this.IDusuario == null){
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   logout(){
     this.authService.logout();
-    Swal.fire({
-      icon: 'success',
-      title: 'Sesion Cerrada',
-      text: 'Hasta pronto',
-    })
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/auth/login')
   }
 
 }

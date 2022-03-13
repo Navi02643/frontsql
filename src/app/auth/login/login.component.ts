@@ -18,23 +18,15 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   user: UserI = new UserI();
-  
+
   ngOnInit() {
   }
 
   onLogin(form: { value: any; }): void {
-    console.log(this.user);
     this.authService.login(form.value).subscribe(res => {
-      console.log('login', form.value)
       if(res!=null) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sesion',
-          text: 'Exitosa',
-        })
-        this.router.navigateByUrl('/auth')
+        this.router.navigateByUrl('/navbar')
       } else {
-        console.log('error');
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

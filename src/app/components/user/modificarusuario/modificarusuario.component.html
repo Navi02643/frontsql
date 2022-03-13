@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container pt-2">
   <div class="jumbotron m-3">
     <div class="text-center">
@@ -11,7 +12,18 @@
           class="form-control"
           id="usuarionombres"
           formControlName="usuarionombres"
+          placeholder="{{this.userdata.usuarionombres}}"
         />
+        <span
+        class="alert alert-danger"
+          *ngIf="
+            this.formulariousuarioedit
+              .get('usuarionombres')
+              ?.hasError('pattern') &&
+            this.formulariousuarioedit.get('usuarionombres')?.touched
+          "
+          >Ingresaste un numero y no esta permitido</span
+        >
       </div>
       <div class="mb-3">
         <label for="usuarioapellidoP" class="form-label">Primer Apellido</label>
@@ -20,18 +32,44 @@
           class="form-control"
           id="usuarioapellidoP"
           formControlName="usuarioapellidoP"
+          placeholder="{{this.userdata.usuarioapellidoP}}"
         />
+        <span
+        class="alert alert-danger"
+          *ngIf="
+            this.formulariousuarioedit
+              .get('usuarioapellidoP')
+              ?.hasError('pattern') &&
+            this.formulariousuarioedit.get('usuarioapellidoP')?.touched
+          "
+          >Ingresaste un numero y no esta permitido</span
+        >
       </div>
       <div class="mb-3">
-        <label for="usuarioapellidoM" class="form-label">Segundo Apellido</label>
+        <label for="usuarioapellidoM" class="form-label"
+          >Segundo Apellido</label
+        >
         <input
           type="text"
           class="form-control"
           id="usuarioapellidoM"
           formControlName="usuarioapellidoM"
+          placeholder="{{this.userdata.usuarioapellidoM}}"
           aria-describedby="usuarioapellidoMhelp"
         />
-        <div id="usuarioapellidoMhelp" class="form-text">Si no se tiene un segundo apellido ingrese una 'X'</div>
+        <span
+        class="alert alert-danger"
+          *ngIf="
+            this.formulariousuarioedit
+              .get('usuarioapellidoM')
+              ?.hasError('pattern') &&
+            this.formulariousuarioedit.get('usuarioapellidoM')?.touched
+          "
+          >Ingresaste un numero y no esta permitido</span
+        >
+        <div id="usuarioapellidoMhelp" class="form-text">
+          Si no se tiene un segundo apellido ingrese una 'X'
+        </div>
       </div>
       <div class="mb-3">
         <label for="usuarioemail" class="form-label">Correo electronico</label>
@@ -40,30 +78,41 @@
           class="form-control"
           id="usuarioemail"
           formControlName="usuarioemail"
+          placeholder="{{this.userdata.usuarioemail}}"
         />
+        <span
+        class="alert alert-danger"
+          *ngIf="
+            this.formulariousuarioedit
+              .get('usuarioemail')
+              ?.hasError('email') &&
+            this.formulariousuarioedit.get('usuarioemail')?.touched
+          "
+          >Ingresa un correo valido</span
+        >
       </div>
       <div class="mb-3">
-        <label for="usuariotelefono" class="form-label">Numero de telefono</label>
+        <label for="usuariotelefono" class="form-label"
+          >Numero de telefono</label
+        >
         <input
           type="text"
           class="form-control"
           id="usuariotelefono"
           formControlName="usuariotelefono"
+          placeholder="{{this.userdata.usuariotelefono}}"
         />
+        <span
+        class="alert alert-danger"
+          *ngIf="
+            this.formulariousuarioedit
+              .get('usuariotelefono')
+              ?.hasError('pattern') &&
+            this.formulariousuarioedit.get('usuariotelefono')?.touched
+          "
+          >Ingresaste una letra y no esta permitido </span
+        >
       </div>
-      <div class="mb-3">
-        <label for="IDcargo" class="form-label">Cargo</label>
-        <select class="form-select" name="IDcargo" id="IDcargo" formControlName="IDcargo">
-          <option *ngFor="let lista of listacargos.rows; count as c" ngValue="{{lista.IDcargo}}">{{lista.cargonombre}}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="IDrol" class="form-label">Rol</label>
-        <select class="form-select" name="IDrol" id="IDrol" formControlName="IDrol">
-          <option *ngFor="let lista of listaroles.rows; count as c" ngValue="{{lista.IDroles}}">{{lista.rolesnombre}}</option>
-        </select>
-      </div>
-
       <div class="text-center">
         <input
           [disabled]="!formulariousuarioedit.valid"
@@ -76,4 +125,5 @@
     </form>
   </div>
 </div>
+
 <router-outlet></router-outlet>

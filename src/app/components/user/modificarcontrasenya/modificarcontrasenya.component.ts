@@ -13,16 +13,22 @@ import Swal from 'sweetalert2';
 })
 export class ModificarcontrasenyaComponent implements OnInit {
   count = 0;
-  IDusuario = 1;
+  IDusuario = localStorage.getItem('ID');
   pass: any = [];
   msg: any = '';
   formulariocontrasenia: FormGroup;
 
   constructor(private userservice: UserService, private router: Router) {}
 
-
   ngOnInit(): void {
+    this.validardatos();
     this.crearform();
+  }
+
+  validardatos() {
+    if (this.IDusuario == null) {
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   crearform() {
@@ -55,7 +61,7 @@ export class ModificarcontrasenyaComponent implements OnInit {
               icon: 'error',
             }).then((item) => {
               if (item.isConfirmed == true) {
-                this.router.navigate(['/auth']);
+                this.router.navigate(['/navbar']);
               }
             });
           }
@@ -66,7 +72,7 @@ export class ModificarcontrasenyaComponent implements OnInit {
             icon: 'success',
           }).then((item) => {
             if (item.isConfirmed == true) {
-              this.router.navigate(['/auth']);
+              this.router.navigate(['/navbar']);
             }
           });
         }
