@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="card mb-3">
+      <div class="card-body">
+        <form #frmProyecto="ngForm" class="login-container" (ngSubmit)="crearProyecto(frmProyecto)">
+            <h3 class="card-header">Crear Proyecto</h3>
+          <div class="form-floating mb-3">
+            <input type="text" name="proyectonombre" class="form-control" ngModel required>
+            <label for="exampleInputNombre" class="form-label">Nombre del Proyecto</label>
+          </div>
+  
+          <div class="form-floating mb-3">
+            <input type="text" name="proyectodescripcion" class="form-control" ngModel required>
+            <label for="exampleInputDescripcion" class="form-label">Descripción</label>
+          </div>
+
+          <div class=" mb-3">
+            <label for="exampleInputNombre" class="form-label">Usuario Asignado al Proyecto</label>
+             <select type="number" name="IDusuario" class="form-select" ngModel required>
+              <option selected>Ver Usuarios Disponibles</option>
+              <option *ngFor="let lista of usuarios.rows; count as c" ngValue="{{ lista.IDusuario }}">
+                {{ lista.IDusuario }}
+                {{ lista.usuarionombres }} 
+                {{ lista.usuarioapellidoP }}
+                {{ lista.usuarioapellidoM }}
+              </option>
+            </select> 
+          </div>
+
+          <hr>
+          <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" value="Send" class="btn btn-dark">Crear Nuevo Proyecto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
