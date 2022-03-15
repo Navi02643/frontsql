@@ -12,6 +12,7 @@ export class VerProyectoComponent implements OnInit {
   constructor(private proyectoService: ProjectService ) { }
 
   proyectoData: any={
+    IDproyecto: "",
     proyectonombre: "",
     proyectodescripcion: "",
     nombreestatus: "",
