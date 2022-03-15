@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchAll } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChargesService } from 'src/app/services/charges.service';
 import { RolesService } from 'src/app/services/roles.service';
+import { UserService } from 'src/app/services/user.service';
 
 import Swal from 'sweetalert2';
 
@@ -19,11 +21,14 @@ export class AltausuarioComponent implements OnInit {
   registro: any = [];
   listaroles: any = [];
   listacargos: any = [];
+  msg: any = [];
+
   constructor(
     private roleservices: RolesService,
     private chargesservie: ChargesService,
     private router: Router,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private userserice: UserService
   ) {}
 
   ngOnInit(): void {
@@ -54,20 +59,51 @@ export class AltausuarioComponent implements OnInit {
 
   createform() {
     this.formulariouser = new FormGroup({
-      usuarionombres: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioapellidoP: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioapellidoM: new FormControl('',Validators.pattern('^[a-zA-Z ]*$')),
-      usuarioemail: new FormControl('',Validators.email),
-      usuariotelefono: new FormControl(''),
-      IDrol: new FormControl(''),
-      usuariocontrasenya: new FormControl(''),
-      IDcargo: new FormControl(''),
-      usuariosalario: new FormControl(''),
+      usuarionombres: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z ]*$'),
+      ]),
+      usuarioapellidoP: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z ]*$'),
+      ]),
+      usuarioapellidoM: new FormControl('', [
+        Validators.pattern('^[a-zA-Z ]*$'),
+      ]),
+      usuarioemail: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      usuariotelefono: new FormControl('', [Validators.pattern('^[0-9]*$')]),
+      IDrol: new FormControl('', [Validators.required]),
+      usuariocontrasenya: new FormControl('', [Validators.required]),
+      IDcargo: new FormControl('', [Validators.required]),
+      usuariosalario: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+      ]),
     });
   }
 
   enviar() {
     this.registro = this.formulariouser.value;
-    console.log(this.registro);
+    this.userserice.postuser(this.registro).subscribe((value) => {
+      this.msg = value;
+      if (this.msg.err == true) {
+        Swal.fire({
+          title: 'Error',
+          text: this.msg.msg,
+          icon: 'error',
+        });
+      } else {
+        Swal.fire({
+          title: 'Exito',
+          text: this.msg.msg,
+          icon: 'success',
+          timer: 3000,
+        });
+        this.ngOnInit();
+      }
+    });
   }
 }

@@ -12,10 +12,10 @@
           class="form-control"
           id="usuarionombres"
           formControlName="usuarionombres"
-          placeholder="{{this.userdata.usuarionombres}}"
+          placeholder="{{ this.userdata.usuarionombres }}"
         />
         <span
-        class="alert alert-danger"
+          class="alert alert-danger"
           *ngIf="
             this.formulariousuarioedit
               .get('usuarionombres')
@@ -32,10 +32,10 @@
           class="form-control"
           id="usuarioapellidoP"
           formControlName="usuarioapellidoP"
-          placeholder="{{this.userdata.usuarioapellidoP}}"
+          placeholder="{{ this.userdata.usuarioapellidoP }}"
         />
         <span
-        class="alert alert-danger"
+          class="alert alert-danger"
           *ngIf="
             this.formulariousuarioedit
               .get('usuarioapellidoP')
@@ -54,11 +54,11 @@
           class="form-control"
           id="usuarioapellidoM"
           formControlName="usuarioapellidoM"
-          placeholder="{{this.userdata.usuarioapellidoM}}"
+          placeholder="{{ this.userdata.usuarioapellidoM }}"
           aria-describedby="usuarioapellidoMhelp"
         />
         <span
-        class="alert alert-danger"
+          class="alert alert-danger"
           *ngIf="
             this.formulariousuarioedit
               .get('usuarioapellidoM')
@@ -78,14 +78,12 @@
           class="form-control"
           id="usuarioemail"
           formControlName="usuarioemail"
-          placeholder="{{this.userdata.usuarioemail}}"
+          placeholder="{{ this.userdata.usuarioemail }}"
         />
         <span
-        class="alert alert-danger"
+          class="alert alert-danger"
           *ngIf="
-            this.formulariousuarioedit
-              .get('usuarioemail')
-              ?.hasError('email') &&
+            this.formulariousuarioedit.get('usuarioemail')?.hasError('email') &&
             this.formulariousuarioedit.get('usuarioemail')?.touched
           "
           >Ingresa un correo valido</span
@@ -100,18 +98,18 @@
           class="form-control"
           id="usuariotelefono"
           formControlName="usuariotelefono"
-          placeholder="{{this.userdata.usuariotelefono}}"
+          placeholder="{{ this.userdata.usuariotelefono }}"
         />
         <span
-        class="alert alert-danger"
+          class="alert alert-danger"
           *ngIf="
             this.formulariousuarioedit
               .get('usuariotelefono')
               ?.hasError('pattern') &&
             this.formulariousuarioedit.get('usuariotelefono')?.touched
           "
-          >Ingresaste una letra y no esta permitido </span
-        >
+          >Debes ingresar un numero
+        </span>
       </div>
       <div class="text-center">
         <input

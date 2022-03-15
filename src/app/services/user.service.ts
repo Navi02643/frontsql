@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { UserP } from '../models/userpass';
 import { UserData } from '../models/userdata';
 import { UserRC } from '../models/userrole';
+import { UserREG } from '../models/userregister'
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class UserService {
 
   getuserINA(){
     return this.http.get(`${this.url}/INA`);
+  }
+
+  postuser(userdata: UserREG){
+    return this.http.post(`${this.url}`,userdata);
   }
 
   deleteuserINA(IDusuario: any){
