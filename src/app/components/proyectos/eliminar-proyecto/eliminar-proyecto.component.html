@@ -4,31 +4,38 @@
     <div class="card mb-3">
         <h4 class="card-header">Eliminar Proyecto</h4>
         <div class="card-body">
+          <div class="pt-2" *ngIf="this.SA == 1">
             <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                      <th scope="col">No#</th>
-                      <th scope="col">Nombre del Proyecto</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Usuario Asignado</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let proyecto of proyectoData">
-                      <td>{{proyecto.IDproyecto}}</td>
-                      <th scope="row">{{proyecto.proyectonombre}}</th>
-                      <td>{{proyecto.nombreestatus}}</td>
-                      <td>{{proyecto.nombre}}</td>
-                      <td><button type="button" class="btn btn-outline-danger" (click)="deleteProyecto(proyecto.IDproyecto)">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                      </svg>
-                    </button></td>
-                    </tr>
-                  </tbody>
-              </table>
+              <thead>
+                  <tr>
+                    <th scope="col">No#</th>
+                    <th scope="col">Nombre del Proyecto</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Usuario Asignado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let proyecto of proyectoData">
+                    <td>{{proyecto.IDproyecto}}</td>
+                    <th scope="row">{{proyecto.proyectonombre}}</th>
+                    <td>{{proyecto.nombreestatus}}</td>
+                    <td>{{proyecto.nombre}}</td>
+                    <td><button type="button" class="btn btn-outline-danger" (click)="deleteProyecto(proyecto.IDproyecto)">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  </button></td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="pt-2" *ngIf="this.SA == 0">
+            <div class="row text-center">
+              <div><h3 class="border border-danger p-3" style="color: red;">Sin proyectos cancelados</h3></div>
+            </div>
+          </div>
         </div>
     </div>
 </div>
