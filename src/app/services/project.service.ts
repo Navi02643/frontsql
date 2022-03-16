@@ -15,6 +15,10 @@ export class ProjectService {
     return this.http.get(this.url)
   }
 
+  getProyectocancel(){
+    return this.http.get(`${this.url}/cancel`)
+  }
+
   postProyecto(proyecto: ProyectoModel){
     return this.http.post(this.url, proyecto);
   }
