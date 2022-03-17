@@ -1,3 +1,5 @@
+<!-- <app-navbar></app-navbar> -->
+
 <div class="container-fluid">
     <div class="row p-5">
         <div class="col-3">
@@ -8,17 +10,20 @@
                 <h5 class="card-header"><h3><b>Crear Tarea:</b></h3></h5>
                 <div class="card-body">
                     <form>
+                      <div class="mb-3">
+                        <input type="number" class="form-control" id="IDusuario" aria-describedby="emailHelp" placeholder="Usuario">
+                      </div>
                         <div class="mb-3">
-                          <input type="text" class="form-control" id="registrarTarea" aria-describedby="emailHelp" placeholder="Nombre">
+                          <input type="text" class="form-control" id="tareanombre" aria-describedby="emailHelp" placeholder="Nombre">
                         </div>
                         <div class="mb-3">
-                          <input type="text" class="form-control p-4" id="descTarea" placeholder="Descripción">
+                          <input type="text" class="form-control p-4" id="tareadescripcion" placeholder="Descripción">
                         </div>
                         <div class="mb-3">
-                          <input type="text" class="form-control" id="proyectoTarea" placeholder="Proyecto">
+                          <input type="text" class="form-control" id="tareaproyecto" placeholder="Proyecto">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="fechaTarea" placeholder="Fecha de finalización">
+                            <input type="date" class="form-control" id="tareafechaf" placeholder="Fecha de finalización">
                           </div>
                           <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-dark btn-lg">Aceptar</button>
