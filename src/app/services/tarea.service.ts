@@ -5,7 +5,7 @@ import { tareas } from '../models/tareas';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class TareasService {
 
   url = 'http://localhost:5000/api/tareas';
 

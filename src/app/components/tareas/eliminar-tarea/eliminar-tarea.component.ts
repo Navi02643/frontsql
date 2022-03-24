@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { tareas } from '../../models/tareas';
+import { tareas } from '../../../models/tareas';
 
 @Component({
   selector: 'app-eliminar-tarea',
