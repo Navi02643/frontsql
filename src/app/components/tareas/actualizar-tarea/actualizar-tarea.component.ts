@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { TareasService } from 'src/app/services/tarea.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
-  selector: 'app-eliminar-tarea',
-  templateUrl: './eliminar-tarea.component.html',
-  styleUrls: ['./eliminar-tarea.component.css']
+  selector: 'app-actualizar-tarea',
+  templateUrl: './actualizar-tarea.component.html',
+  styleUrls: ['./actualizar-tarea.component.css']
 })
-export class EliminarTareaComponent implements OnInit {
+export class ActualizarTareaComponent implements OnInit {
 
   message: any = '';
-  IDusuario = localStorage.getItem('ID');
-  IDrolLS = Number(localStorage.getItem('CARGO'));
 
-  constructor( 
+  constructor(
+    private router:Router,
     private tareasS: TareasService
   ) { }
 
@@ -31,20 +30,16 @@ export class EliminarTareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTareas();
-    this.deleteTarea
-    console.log('TareasInfo:', this.TareasInfo)
+    console.log(this.TareasInfo)
   }
-
 
   getTareas() {
     return this.tareasS.getTareasAll().subscribe(value => {
       this.TareasInfo=value;
       this.TareasInfo=this.TareasInfo.rows;
-      console.log('Tareas registradas:', value)
+      console.log(value)
     });
-  }
-  
-  deleteTarea(IDtareas: number) {
+  }deleteTarea(IDtareas: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success m-10px',
@@ -54,13 +49,13 @@ export class EliminarTareaComponent implements OnInit {
     });
     swalWithBootstrapButtons
       .fire({
-        title: '¿Estás seguro de querer eliminar esta tarea?',
-        text: "No podrás revertir esta acción.",
+        title: '¿Estás seguro de que quieres editar esta tarea?',
+        text: "No podrás revertir esta acción o al menos de que la vuelvas a modificar.",
         icon: 'warning',
         showCloseButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
         reverseButtons: true,
       })
       .then((result) => {
@@ -68,16 +63,10 @@ export class EliminarTareaComponent implements OnInit {
           this.tareasS.deleteTarea(IDtareas).subscribe((value) => {
             this.message = value;
             if (this.message.err == false) {
-              swalWithBootstrapButtons.fire(this.message.message, 'Se ha eliminado la tarea satiscatoriamente.', 'success');
+              swalWithBootstrapButtons.fire(this.message.message, '', 'success');
               this.ngOnInit();
             }
           });
-        }else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire(
-            'Cancelado',
-            'La tarea no se eliminó.',
-            'warning'
-          );
         }
       });
   }

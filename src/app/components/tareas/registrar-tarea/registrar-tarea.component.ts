@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TareasService } from 'src/app/services/tarea.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import {NgForm} from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,6 +20,7 @@ export class RegistrarTareaComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.allUsers();
   }
 
   allUsers() {
@@ -37,6 +37,7 @@ export class RegistrarTareaComponent implements OnInit {
         text: '¡Tarea registrada satisfactoriamente!.',
       })
       this.router.navigateByUrl('/tareasLayout')
-        })
+    })
+    console.log(form.value)
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TareasService } from 'src/app/services/tarea.service';
 
 
@@ -9,27 +10,34 @@ import { TareasService } from 'src/app/services/tarea.service';
 })
 export class TareasLayoutComponent implements OnInit {
 
+  constructor(
+    private tareasS: TareasService,
+    private router: Router
+  ) { }
+
 // public tareas: Tarea[]=[
 //   new Tarea("Test", "Test")
 // ];
+
 TareasInfo: any={
-    IDtareas: "",
-    // IDproyecto: "",
-    IDusuario: "",
-    // IDestado: "",
-    tareanombre: "",
-    tareadescripcion: "",
-    tareaproyecto: "",
-    tareafechaf: ""
+  IDtareas: "",
+  IDproyecto: "",
+  IDusuario: "",
+  // IDestado: "",
+  tareanombre: "",
+  tareadescripcion: "",
+  tareafechaf: "",
 };
 
-  constructor(
-    private tareasS: TareasService,
-
-  ) { }
+CanceladosInfo: any = {
+  IDestado: "",
+  nombreestatus: "",
+}
 
   ngOnInit(): void {
     this.getTareas();
+    this.verTareasCanceladas();
+    console.log('TareasInfo:',this.TareasInfo);
   }
 
 
@@ -37,6 +45,19 @@ TareasInfo: any={
     return this.tareasS.getTareasAll().subscribe(value => {
       this.TareasInfo=value;
       this.TareasInfo=this.TareasInfo.rows;
+      console.log('Tareas obtenidas:',value)
     });
+  }
+
+  verTareasCanceladas() {
+    this.tareasS.getTareaCancel().subscribe((value) => {
+      this.CanceladosInfo = value;
+      this.CanceladosInfo = this.CanceladosInfo.rows;
+      console.log('Tareas canceladas:', value);
+    });
+  }
+
+  updateTareas(IDtareas: number){
+    this.router.navigate(['editarTarea', IDtareas]);
   }
 }

@@ -21,6 +21,7 @@ import { EditarTareaComponent } from './components/tareas/editar-tarea/editar-ta
 import { RegistrarTareaComponent } from './components/tareas/registrar-tarea/registrar-tarea.component';
 import { EliminarTareaComponent } from './components/tareas/eliminar-tarea/eliminar-tarea.component';
 import { TareasLayoutComponent } from './components/tareas/tareas-layout/tareas-layout.component';
+import { ActualizarTareaComponent } from './components/tareas/actualizar-tarea/actualizar-tarea.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TareasLayoutComponent } from './components/tareas/tareas-layout/tareas-
     RegistrarTareaComponent,
     EliminarTareaComponent,
     TareasLayoutComponent,
+    ActualizarTareaComponent,
   ],
   imports: [
     BrowserModule,
