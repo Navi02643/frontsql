@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/header/navbar/navbar.component';
+import { FileUploadModule } from 'ng2-file-upload';
+
 import { EditarTareaComponent } from './tareas/editar-tarea/editar-tarea.component';
 import { RegistrarTareaComponent } from './tareas/registrar-tarea/registrar-tarea.component';
 import { EliminarTareaComponent } from './tareas/eliminar-tarea/eliminar-tarea.component';
@@ -44,7 +46,8 @@ import { VerProyectoComponent } from './components/proyectos/ver-proyecto/ver-pr
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -58,7 +58,6 @@ export class ModificarcargorolComponent implements OnInit {
     this.userservice.getuseresp(this.IDusuario).subscribe(value=>{
       this.userdata = value;
       this.userdata =  this.userdata.rows;
-      console.log(this.userdata);
     })
   }
 
