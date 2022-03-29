@@ -1,47 +1,94 @@
 <!-- <app-navbar></app-navbar> -->
 
 <div class="container-fluid">
-    <div class="row p-5">
-        <div class="col-3">
-            
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <h5 class="card-header"><h3><b>Crear Tarea:</b></h3></h5>
-                <div class="card-body">
-                    <form #formTareas="ngForm" class="registrarTarea" (ngSubmit)="registrarTarea(formTareas)">
-                      <!-- <div class="mb-3">
+  <div class="row p-5">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="card">
+        <h5 class="card-header">
+          <h3><b>Crear Tarea:</b></h3>
+        </h5>
+        <div class="card-body">
+          <form
+            #formTareas="ngForm"
+            class="registrarTarea"
+            (ngSubmit)="registrarTarea(formTareas)"
+          >
+            <!-- <div class="mb-3">
                         <input type="number" class="form-control" id="IDusuario" aria-describedby="emailHelp" placeholder="Usuario" name="IDusuario" ngModel >
                       </div> -->
-                      <div class=" mb-3">
-                        <label for="exampleInputNombre" class="form-label">Usuario Asignado al Proyecto</label>
-                         <select type="number" name="IDusuario" class="form-select" name="IDusuario" ngModel>
-                          <option *ngFor="let usuario of usuarios.rows; count as c" ngValue="{{ usuario.IDusuario }}">
-                            {{ usuario.IDusuario }}
-                            {{ usuario.usuarionombres }} 
-                            {{ usuario.usuarioapellidoP }}
-                            {{ usuario.usuarioapellidoM }}
-                          </option>
-                        </select> 
-                      </div>
-                        <div class="mb-3">
-                          <input type="text" class="form-control" id="tareanombre" aria-describedby="emailHelp" placeholder="Nombre" name="tareanombre" ngModel>
-                        </div>
-                        <div class="mb-3">
-                          <input type="text" class="form-control p-4" id="tareadescripcion" placeholder="Descripción" name="tareadescripcion" ngModel>
-                        </div>
-                        <div class="mb-3">
-                          <input type="text" class="form-control" id="tareaproyecto" placeholder="Proyecto" name="tareaproyecto" ngModel>
-                        </div>
-                        <div class="mb-3">
-                            <input type="date" class="form-control" id="tareafechaf" placeholder="Fecha de finalización" name="tareafechaf" ngModel>
-                          </div>
-                          <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-dark btn-lg" value="Send">Aceptar</button>
-                          </div>
-                      </form>
-                </div>
-              </div>
+            <div class="mb-3">
+              <label for="exampleInputNombre" class="form-label"
+                >Usuario Asignado al Proyecto</label
+              >
+              <select
+                type="number"
+                name="IDusuario"
+                class="form-select"
+                name="IDusuario"
+                ngModel
+              >
+                <option
+                  *ngFor="let usuario of usuarios.rows; count as c"
+                  ngValue="{{ usuario.IDusuario }}"
+                >
+                  {{ usuario.usuarionombres }}
+                  {{ usuario.usuarioapellidoP }}
+                  {{ usuario.usuarioapellidoM }}
+                </option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="tareanombre"
+                aria-describedby="emailHelp"
+                placeholder="Nombre"
+                name="tareanombre"
+                ngModel
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control p-4"
+                id="tareadescripcion"
+                placeholder="Descripción"
+                name="tareadescripcion"
+                ngModel
+              />
+            </div>
+            <div class="mb-3">
+              <select
+                type="number"
+                name="IDproyecto"
+                class="form-select"
+                name="IDproyecto"
+                ngModel
+              >
+                <option *ngFor="let proyecto of proyectos.rows; count as c"
+                ngValue="{{ proyecto.IDproyecto }}">{{proyecto.proyectonombre}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input
+                type="date"
+                class="form-control"
+                id="tareafechaf"
+                placeholder="Fecha de finalización"
+                name="tareafechaf"
+                ngModel
+              />
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-dark btn-lg" value="Send">
+                Aceptar
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
