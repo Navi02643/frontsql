@@ -14,6 +14,7 @@ import { TareasLayoutComponent } from './components/tareas/tareas-layout/tareas-
 import { RegistrarTareaComponent } from './components/tareas/registrar-tarea/registrar-tarea.component';
 import { EliminarTareaComponent } from './components/tareas/eliminar-tarea/eliminar-tarea.component';
 import { EditarTareaComponent } from './components/tareas/editar-tarea/editar-tarea.component';
+import { ActualizarTareaComponent } from './components/tareas/actualizar-tarea/actualizar-tarea.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'eliminarTarea', component: EliminarTareaComponent, pathMatch:'full'},
   {path: 'editarTarea', component: EditarTareaComponent, pathMatch:'full'},
   {path: 'tareasLayout', component: TareasLayoutComponent, pathMatch:'full'},
+  {path: 'actualizarTarea', component: ActualizarTareaComponent, pathMatch:'full'},
   //MODULO PROYECTOS:
   {path: 'registrar-proyecto', component: RegistrarProyectoComponent, pathMatch:'full'},
   {path: 'editar-proyecto', component: EditarProyectoComponent, pathMatch:'full'},
