@@ -20,7 +20,7 @@ export class RegistrarProyectoComponent implements OnInit {
   }
 
   allUsers() {
-    this.userService.getuserall().subscribe((value) => {
+    this.userService.getuserENC().subscribe((value) => {
       this.usuarios = value;
     });
   }

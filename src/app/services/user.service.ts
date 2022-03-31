@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get(this.url)
   }
 
+  getuserENC(){
+    return this.http.get(`${this.url}/ENC`)
+  }
+
   getuserACT(){
     return this.http.get(`${this.url}/ACT`)
   }

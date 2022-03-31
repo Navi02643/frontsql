@@ -1,6 +1,6 @@
-export class ProyectoModel {
-    IDproyecto: string;
+export interface ProyectoModel {
     proyectonombre: string;
     proyectodescripcion: string;
-    IDusuario: number;
+    IDestado: number;
+    IDusuario: number;  
 }

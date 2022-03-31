@@ -16,7 +16,7 @@
           </div>
 
           <div class=" mb-3">
-            <label for="exampleInputNombre" class="form-label">Usuario Asignado al Proyecto</label>
+            <label for="exampleInputNombre" class="form-label">Administrador del Proyecto</label>
              <select type="number" name="IDusuario" class="form-select" ngModel required>
               <option selected>Ver Usuarios Disponibles</option>
               <option *ngFor="let lista of usuarios.rows; count as c" ngValue="{{ lista.IDusuario }}">
