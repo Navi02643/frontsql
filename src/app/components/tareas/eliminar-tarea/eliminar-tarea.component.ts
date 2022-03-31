@@ -68,7 +68,7 @@ export class EliminarTareaComponent implements OnInit {
           this.tareasS.deleteTarea(IDtareas).subscribe((value) => {
             this.message = value;
             if (this.message.err == false) {
-              swalWithBootstrapButtons.fire(this.message.message, 'Se ha eliminado la tarea satiscatoriamente.', 'success');
+              swalWithBootstrapButtons.fire(this.message.message, 'Se ha eliminado la tarea satisfactoriamente.', 'success');
               this.ngOnInit();
             }
           });
