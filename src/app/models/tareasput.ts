@@ -1,5 +1,5 @@
 export interface tareasPF {
-  IDusuario: number,
+  IDusuario: string,
   tareanombre: string,
   tareadescripcion: string,
   tareafechaf: string
