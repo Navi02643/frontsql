@@ -65,7 +65,7 @@
           </div>
 
           <div class=" mb-3">
-            <label for="exampleInputNombre" class="form-label">Administrador del Proyecto</label>
+            <label for="exampleInputNombre" class="form-label">Estado del Proyecto</label>
              <select formControlName="IDestado"  ngModel="{{this.proyectoData[0].nombreestatus}}" class="form-select">
               <option *ngFor="let lista2 of estados.rows; count as c" ngValue="{{ lista2.IDestado }}">
                 {{ lista2.nombreestatus }} 
