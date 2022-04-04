@@ -24,6 +24,7 @@ export class RegistrarTareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.allUsers();
+    this.allprojects()
   }
 
   allUsers() {
@@ -35,10 +36,48 @@ export class RegistrarTareaComponent implements OnInit {
   allprojects(){
     this.proyectoService.getProyectoAll().subscribe(value=>{
       this.proyectos = value;
+      this.proyectos = this.proyectos.rows
+      console.log(this.proyectos);
+
     })
   }
 
   registrarTarea(form: {value: any;}):void {
+    console.log(form.value);
+
+    if(form.value.IDusuario == ""){
+      Swal.fire({
+        icon: 'warning',
+        title: 'upps',
+        text: 'Debes seleccionar el Usuario'
+      })
+      return
+    }
+    if(form.value.tareanombre == ""){
+      Swal.fire({
+        icon: 'warning',
+        title: 'upps',
+        text: 'Debes rellenar el Nombre'
+      })
+      return
+    }
+    if(form.value.IDproyecto == ""){
+      Swal.fire({
+       icon: 'warning',
+       title: 'upps',
+       text: 'Debes seleccionar el proyecto'
+     })
+     return
+   }
+    if(form.value.tareafechaf == ""){
+      Swal.fire({
+        icon: 'warning',
+        title: 'upps',
+        text: 'Debes seleccionar la fecha de entrega'
+      })
+      return
+    }
+
     this.tareasService.postTarea(form.value).subscribe(res => {
       Swal.fire({
         icon: 'success',
