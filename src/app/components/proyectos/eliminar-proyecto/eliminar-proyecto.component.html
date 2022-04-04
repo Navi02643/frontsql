@@ -1,34 +1,244 @@
 <app-navbar></app-navbar>
-
-<div class="container">
-    <div class="card mb-3">
-        <h4 class="card-header">Eliminar Proyecto</h4>
-        <div class="card-body">
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                      <th scope="col">No#</th>
-                      <th scope="col">Nombre del Proyecto</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Usuario Asignado</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let proyecto of proyectoData">
-                      <td>{{proyecto.IDproyecto}}</td>
-                      <th scope="row">{{proyecto.proyectonombre}}</th>
-                      <td>{{proyecto.nombreestatus}}</td>
-                      <td>{{proyecto.nombre}}</td>
-                      <td><button type="button" class="btn btn-outline-danger" (click)="deleteProyecto(proyecto.IDproyecto)">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                      </svg>
-                    </button></td>
-                    </tr>
-                  </tbody>
-              </table>
-        </div>
+<!-- ///////////////////////////////////////////TABLA PARA ACTUALIZAR DATOS DE PROYECTOS ACTIVOS////////////////////////////////////// -->
+<div class="container" *ngIf="actualizar === false">
+  <div class="card mb-3">
+    <h4 class="card-header">Actualización de Proyectos</h4>
+    <div class="card-body">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No#</th>
+            <th scope="col">Nombre del Proyecto</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Usuario Asignado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proyecto of proyectoData">
+            <td>{{ proyecto.IDproyecto }}</td>
+            <th scope="row">{{ proyecto.proyectonombre }}</th>
+            <td>{{ proyecto.proyectodescripcion }}</td>
+            <td>{{ proyecto.nombreestatus }}</td>
+            <td>{{ proyecto.nombre }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                (click)="obtenerProyecto(proyecto.IDproyecto)"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-pencil-square"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
+
+<!-- //////////////////////////////////////////////PANTALLA PARA HACER LA ACTUALIZACION/////////////////////////////////////////7 -->
+
+<div class="container" *ngIf="actualizar === true">
+  <div class="card mb-3">
+    <div class="card-body">
+      <form [formGroup]="formProyectoEdit">
+        <h3 class="card-header">Actualizar Proyecto Seleccionado</h3>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            id="proyectonombre"
+            formControlName="proyectonombre"
+            ngModel="{{ this.proyectoData[0].proyectonombre }}"
+            class="form-control"
+          />
+          <label for="proyectonombre" class="form-label"
+            >Nombre del Proyecto</label
+          >
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            formControlName="proyectodescripcion"
+            ngModel="{{ this.proyectoData[0].proyectodescripcion }}"
+            class="form-control"
+          />
+          <label for="exampleInputDescripcion" class="form-label"
+            >Descripción</label
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputNombre" class="form-label"
+            >Administrador del Proyecto</label
+          >
+          <select
+            formControlName="IDusuario"
+            ngModel="{{ this.proyectoData[0].IDusuario }}"
+            class="form-select"
+          >
+            <option
+              *ngFor="let lista of usuarios; count as c"
+              ngValue="{{ lista.IDusuario }}"
+            >
+              {{ lista.usuarionombres }}
+              {{ lista.usuarioapellidoP }}
+              {{ lista.usuarioapellidoM }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputNombre" class="form-label"
+            >Estado del Proyecto</label
+          >
+          <select
+            formControlName="IDestado"
+            ngModel="{{ this.proyectoData[0].IDestado }}"
+            class="form-select"
+          >
+            <option
+              *ngFor="let lista2 of estados; count as c"
+              ngValue="{{ lista2.IDestado }}"
+            >
+              {{ lista2.nombreestatus }}
+            </option>
+          </select>
+        </div>
+
+        <hr />
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button
+            type="submit"
+            value="Send"
+            class="btn btn-dark"
+            (click)="modificarProyecto()"
+          >
+            Modificar Proyecto
+          </button>
+          <button
+            type="submit"
+            value="Send"
+            class="btn btn-primary"
+            (click)="volver()"
+          >
+            Ver Proyectos
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- /////////////////////////////TABLA PARA ELIMINAR PROYECTOS CANCELADOS///////////////////////////////////////// -->
+
+<div class="container" *ngIf="actualizar2 === false">
+  <div class="card mb-3">
+    <h4 class="card-header">Eliminar Proyecto</h4>
+    <div class="card-body">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No#</th>
+            <th scope="col">Nombre del Proyecto</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Usuario Asignado</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proyecto of proyectoDataCANCEL">
+            <td>{{ proyecto.IDproyecto }}</td>
+            <th scope="row">{{ proyecto.proyectonombre }}</th>
+            <td>{{ proyecto.nombreestatus }}</td>
+            <td>{{ proyecto.nombre }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="obtenerProyectoCANCEL(proyecto.IDproyecto)"
+              >
+                Reactivar
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                (click)="deleteProyecto(proyecto.IDproyecto)"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-trash"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////PANTALLA PARA CONFIRMAR LA REACTIVACION DEL PROYECTO////////////////////////////// -->
+<div class="container" *ngIf="actualizar2 === true">
+  <div class="card mb-3">
+    <div class="card-body">
+      <form>
+        <h3>
+          Reactivar el proyecto "{{
+            this.proyectoDataCANCEL[0].proyectonombre
+          }}" con estado "En Pausa"
+        </h3>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button
+            type="submit"
+            value="Send"
+            class="btn btn-success"
+            (click)="modificarProyectoCANCEL()"
+          >
+            Reactivar {{ this.proyectoDataCANCEL[0].proyectonombre }}
+          </button>
+          <button
+            type="submit"
+            value="Send"
+            class="btn btn-primary"
+            (click)="volver()"
+          >
+            Ver Proyectos Cancelados
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

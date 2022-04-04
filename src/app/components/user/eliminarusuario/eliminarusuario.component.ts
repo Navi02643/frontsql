@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class EliminarusuarioComponent implements OnInit {
   IDusuario = localStorage.getItem('ID');
-  IDrolLS = Number(localStorage.getItem('CARGO'));
+  IDrolLS = Number(localStorage.getItem('ROL'));
   listainactivos: any = [];
   SA: any = '';
   msg: any = '';
@@ -23,7 +23,7 @@ export class EliminarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.validardatos();
+    // this.validardatos();
     this.listaINA();
   }
 

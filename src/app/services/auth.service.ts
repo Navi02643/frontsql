@@ -18,14 +18,14 @@ export class AuthService {
       .pipe(
         tap((res: JwtResponseI) => {
           if (res) {
-            //guardar token
             this.saveToken(
               res.Info.accessToken,
               res.Info.IDusuario,
               res.Info.usuarionombres,
               res.Info.usuarioapellidoP,
               res.Info.usuarioapellidoM,
-              res.Info.IDrol
+              res.Info.IDrol,
+              res.Info.IDcargo
             );
           }
         })
@@ -39,6 +39,7 @@ export class AuthService {
     localStorage.removeItem('USERNAME');
     localStorage.removeItem('USERAP1');
     localStorage.removeItem('USERAP2');
+    localStorage.removeItem('ROL');
     localStorage.removeItem('CARGO');
   }
 
@@ -48,21 +49,17 @@ export class AuthService {
     usuarionombres: string,
     usuarioapellidoP: string,
     usuarioapellidoM: string,
-    IDrol: string
+    IDrol: string,
+    IDcargo: string
   ): void {
     localStorage.setItem('ACCESS_TOKEN', token);
     localStorage.setItem('ID', IDusuario);
     localStorage.setItem('USERNAME', usuarionombres);
     localStorage.setItem('USERAP1', usuarioapellidoP);
     localStorage.setItem('USERAP2', usuarioapellidoM);
-    localStorage.setItem('CARGO', IDrol);
+    localStorage.setItem('ROL', IDrol);
+    localStorage.setItem('CARGO', IDcargo);
     this.token = token;
   }
 
-  // private getToken(): string {
-  //   if (!this.token) {
-  //     this.token = localStorage.getItem("ACCESS_TOKEN");
-  //   }
-  //   return this.token;
-  // }
 }
