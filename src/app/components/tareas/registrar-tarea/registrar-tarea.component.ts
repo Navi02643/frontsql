@@ -4,27 +4,38 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProjectService } from 'src/app/services/project.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registrar-tarea',
   templateUrl: './registrar-tarea.component.html',
-  styleUrls: ['./registrar-tarea.component.css']
+  styleUrls: ['./registrar-tarea.component.css'],
 })
 export class RegistrarTareaComponent implements OnInit {
-
   usuarios: any = [];
   proyectos: any = [];
+  IDusuario = localStorage.getItem('ID');
+  IDcargo = Number(localStorage.getItem('CARGO'));
 
   constructor(
     private tareasService: TareasService,
     private userService: UserService,
     private proyectoService: ProjectService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.allUsers();
-    this.allprojects()
+    this.allprojects();
+    this.validardatos();
+  }
+
+  validardatos() {
+    if (this.IDusuario == null || this.IDcargo != 7) {
+      this.authservice.logout();
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   allUsers() {
@@ -33,59 +44,54 @@ export class RegistrarTareaComponent implements OnInit {
     });
   }
 
-  allprojects(){
-    this.proyectoService.getProyectoAll().subscribe(value=>{
+  allprojects() {
+    this.proyectoService.getProyectoAll().subscribe((value) => {
       this.proyectos = value;
-      this.proyectos = this.proyectos.rows
-      console.log(this.proyectos);
-
-    })
+      this.proyectos = this.proyectos.rows;
+    });
   }
 
-  registrarTarea(form: {value: any;}):void {
-    console.log(form.value);
-
-    if(form.value.IDusuario == ""){
+  registrarTarea(form: { value: any }): void {
+    if (form.value.IDusuario == '') {
       Swal.fire({
         icon: 'warning',
         title: 'upps',
-        text: 'Debes seleccionar el Usuario'
-      })
-      return
+        text: 'Debes seleccionar el Usuario',
+      });
+      return;
     }
-    if(form.value.tareanombre == ""){
+    if (form.value.tareanombre == '') {
       Swal.fire({
         icon: 'warning',
         title: 'upps',
-        text: 'Debes rellenar el Nombre'
-      })
-      return
+        text: 'Debes rellenar el Nombre',
+      });
+      return;
     }
-    if(form.value.IDproyecto == ""){
-      Swal.fire({
-       icon: 'warning',
-       title: 'upps',
-       text: 'Debes seleccionar el proyecto'
-     })
-     return
-   }
-    if(form.value.tareafechaf == ""){
+    if (form.value.IDproyecto == '') {
       Swal.fire({
         icon: 'warning',
         title: 'upps',
-        text: 'Debes seleccionar la fecha de entrega'
-      })
-      return
+        text: 'Debes seleccionar el proyecto',
+      });
+      return;
+    }
+    if (form.value.tareafechaf == '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'upps',
+        text: 'Debes seleccionar la fecha de entrega',
+      });
+      return;
     }
 
-    this.tareasService.postTarea(form.value).subscribe(res => {
+    this.tareasService.postTarea(form.value).subscribe((res) => {
       Swal.fire({
         icon: 'success',
         title: 'Ready!',
         text: '¡Tarea registrada satisfactoriamente!.',
-      })
-      this.router.navigateByUrl('/tareasLayout')
-    })
-    console.log(form.value)
+      });
+      this.router.navigateByUrl('/tareasLayout');
+    });
   }
 }

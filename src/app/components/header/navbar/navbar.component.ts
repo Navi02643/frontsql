@@ -10,20 +10,13 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   userInfo: any = [];
   IDusuario = localStorage.getItem('ID');
-  IDrol = Number(localStorage.getItem('CARGO'));
+  IDrol = Number(localStorage.getItem('ROL'));
+  IDCargo = Number(localStorage.getItem('CARGO'));
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.userInfo = localStorage.getItem("USERNAME");
-    console.log("User Logueado: ",this.userInfo);
-    this.validardatos();
-  }
-
-  validardatos() {
-    if (this.IDusuario == null) {
-      this.router.navigate(['/auth/login']);
-    }
+    this.userInfo = localStorage.getItem('USERNAME');
   }
 
   logout() {

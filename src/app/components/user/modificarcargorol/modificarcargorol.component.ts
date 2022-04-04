@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ModificarcargorolComponent implements OnInit {
   IDusuario2 = localStorage.getItem('ID');
-  IDrolLS = Number(localStorage.getItem('CARGO'));
+  IDrolLS = Number(localStorage.getItem('ROL'));
   formulariorolescargos: FormGroup;
   listausuarios: any = [];
   listaroles: any = [];
@@ -23,11 +23,11 @@ export class ModificarcargorolComponent implements OnInit {
   registro: any = [];
   IDusuario = '';
   msg: any = [];
-  userdata: any={
-    IDrol: "",
-    IDcargo: "",
-    usuarioestado: "",
-    usuariosalario: "",
+  userdata: any = {
+    IDrol: '',
+    IDcargo: '',
+    usuarioestado: '',
+    usuariosalario: '',
   };
 
   constructor(
@@ -46,20 +46,19 @@ export class ModificarcargorolComponent implements OnInit {
     this.crearform();
   }
 
-  validardatos(){
-    if(this.IDusuario2 == null || this.IDrolLS != 1){
+  validardatos() {
+    if (this.IDusuario2 == null || this.IDrolLS != 1) {
       this.authservice.logout();
       this.router.navigate(['/auth/login']);
     }
   }
 
-  data(){
+  data() {
     this.IDusuario = this.formulariorolescargos.value.IDusuario;
-    this.userservice.getuseresp(this.IDusuario).subscribe(value=>{
+    this.userservice.getuseresp(this.IDusuario).subscribe((value) => {
       this.userdata = value;
-      this.userdata =  this.userdata.rows;
-      console.log(this.userdata);
-    })
+      this.userdata = this.userdata.rows;
+    });
   }
 
   getusers() {

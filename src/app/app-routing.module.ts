@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'register',component: AltausuarioComponent,pathMatch: 'full'},
   //MÓDULO TAREAS:
   {path: 'registrarTarea', component: RegistrarTareaComponent, pathMatch:'full'},
-  {path: 'eliminarTarea', component: EliminarTareaComponent, pathMatch:'full'},
+  {path: 'verTarea', component: EliminarTareaComponent, pathMatch:'full'},
   {path: 'editarTarea', component: EditarTareaComponent, pathMatch:'full'},
   {path: 'tareasLayout', component: TareasLayoutComponent, pathMatch:'full'},
   {path: 'actualizarTarea', component: ActualizarTareaComponent, pathMatch:'full'},

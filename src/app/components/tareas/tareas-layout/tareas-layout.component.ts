@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TareasService } from 'src/app/services/tarea.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tareas-layout',
@@ -9,7 +10,15 @@ import { TareasService } from 'src/app/services/tarea.service';
   styleUrls: ['./tareas-layout.component.css'],
 })
 export class TareasLayoutComponent implements OnInit {
-  constructor(private tareasS: TareasService, private router: Router) { }
+  IDusuarioVD = localStorage.getItem('ID');
+  IDrolVD = Number(localStorage.getItem('ROL'));
+  IDcargo = Number(localStorage.getItem('CARGO'));
+
+  constructor(
+    private tareasS: TareasService,
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
   message: any = '';
   // public tareas: Tarea[]=[
@@ -35,13 +44,21 @@ export class TareasLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.getTareas();
     this.verTareasCanceladas();
+    this.validardatos();
+  }
+
+  validardatos() {
+    if (this.IDusuarioVD == null || this.IDrolVD != 1 || this.IDcargo != 7) {
+      this.authservice.logout();
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   getTareas() {
     return this.tareasS.getTareasAll().subscribe((value) => {
       this.TareasInfo = value;
       this.TareasInfo = this.TareasInfo.rows;
-      console.log('Tareas:', value)
+      console.log('Tareas:', value);
     });
   }
 
@@ -49,7 +66,7 @@ export class TareasLayoutComponent implements OnInit {
     this.tareasS.getTareaCancel().subscribe((value) => {
       this.CanceladosInfo = value;
       this.CanceladosInfo = this.CanceladosInfo.rows;
-      console.log('Tareas Canceladas:', value)
+      console.log('Tareas Canceladas:', value);
     });
   }
 
@@ -70,7 +87,7 @@ export class TareasLayoutComponent implements OnInit {
     swalWithBootstrapButtons
       .fire({
         title: '¿Estás seguro de querer reactivar esta tarea?',
-        text: "No podrás revertir esta acción.",
+        text: 'No podrás revertir esta acción.',
         icon: 'warning',
         showCloseButton: true,
         showCancelButton: true,
@@ -83,7 +100,11 @@ export class TareasLayoutComponent implements OnInit {
           this.tareasS.deletereactivar(IDtareas).subscribe((value) => {
             this.ngOnInit();
             if (this.message.err == false) {
-              swalWithBootstrapButtons.fire(this.message.message, 'Se ha reactivado la tarea satisfactoriamente.', 'success');
+              swalWithBootstrapButtons.fire(
+                this.message.message,
+                'Se ha reactivado la tarea satisfactoriamente.',
+                'success'
+              );
               this.ngOnInit();
             }
           });
@@ -114,7 +135,7 @@ export class TareasLayoutComponent implements OnInit {
     swalWithBootstrapButtons
       .fire({
         title: '¿Estás seguro de querer eliminar esta tarea?',
-        text: "No podrás revertir esta acción.",
+        text: 'No podrás revertir esta acción.',
         icon: 'warning',
         showCloseButton: true,
         showCancelButton: true,
@@ -127,7 +148,11 @@ export class TareasLayoutComponent implements OnInit {
           this.tareasS.deleteTarea(IDtareas).subscribe((value) => {
             this.ngOnInit();
             if (this.message.err == false) {
-              swalWithBootstrapButtons.fire(this.message.message, 'Se ha eliminado la tarea satiscatoriamente.', 'success');
+              swalWithBootstrapButtons.fire(
+                this.message.message,
+                'Se ha eliminado la tarea satiscatoriamente.',
+                'success'
+              );
               this.ngOnInit();
             }
           });
@@ -152,7 +177,7 @@ export class TareasLayoutComponent implements OnInit {
     swalWithBootstrapButtons
       .fire({
         title: '¿Está seguro de querer modificar esta tarea?',
-        text: "No podrás revertir esta acción.",
+        text: 'No podrás revertir esta acción.',
         icon: 'warning',
         showCloseButton: true,
         showCancelButton: true,
@@ -164,9 +189,13 @@ export class TareasLayoutComponent implements OnInit {
         if (result.isConfirmed) {
           localStorage.setItem('IDtareas', IDtareas);
           this.router.navigate(['editarTarea']);
-          console.log('Update tareas:', IDtareas)
+          console.log('Update tareas:', IDtareas);
           if (this.message.err == false) {
-            swalWithBootstrapButtons.fire(this.message.message, 'Se ha modificado la tarea satisfactoriamente.', 'success');
+            swalWithBootstrapButtons.fire(
+              this.message.message,
+              'Se ha modificado la tarea satisfactoriamente.',
+              'success'
+            );
             this.ngOnInit();
           }
         } else if (result.dismiss === Swal.DismissReason.cancel) {

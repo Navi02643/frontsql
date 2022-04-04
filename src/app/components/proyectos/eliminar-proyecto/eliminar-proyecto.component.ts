@@ -17,16 +17,23 @@ export class EliminarProyectoComponent implements OnInit {
   estados: any = [];
   proyectos: any;
   formProyectoEdit: FormGroup;
+  IDusuarioVD = localStorage.getItem('ID');
+  IDrolVD = Number(localStorage.getItem('ROL'));
+  IDcargo = Number(localStorage.getItem('CARGO'));
 
-  constructor(private proyectoService: ProjectService, private userService: UserService, private router: Router ) { }
+  constructor(
+    private proyectoService: ProjectService,
+    private userService: UserService,
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
-  actualizar: boolean = false
-  actualizar2: boolean = false
+  actualizar: boolean = false;
+  actualizar2: boolean = false;
 
-  IDproyecto: any= "";
+  IDproyecto: any = '';
   proyectoEdit: any = [];
   proyectoEdit2: any = [];
-
 
   proyectoData: any = {
     IDproyecto: '',
@@ -36,12 +43,12 @@ export class EliminarProyectoComponent implements OnInit {
     nombre: '',
   };
 
-  proyectoDataCANCEL: any={
-    IDproyecto: "",
-    proyectonombre: "",
-    proyectodescripcion: "",
-    nombreestatus: "",
-    nombre: "",
+  proyectoDataCANCEL: any = {
+    IDproyecto: '',
+    proyectonombre: '',
+    proyectodescripcion: '',
+    nombreestatus: '',
+    nombre: '',
   };
 
   ngOnInit() {
@@ -50,6 +57,14 @@ export class EliminarProyectoComponent implements OnInit {
     this.allUsers();
     this.formProyecto();
     this.allStatus();
+    this.validardatos();
+  }
+
+  validardatos() {
+    if (this.IDusuarioVD == null || this.IDrolVD != 1 || this.IDcargo != 7) {
+      this.authservice.logout();
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   allUsers() {
@@ -64,7 +79,6 @@ export class EliminarProyectoComponent implements OnInit {
     });
   }
 
-
   formProyecto() {
     this.formProyectoEdit = new FormGroup({
       proyectonombre: new FormControl(''),
@@ -74,49 +88,42 @@ export class EliminarProyectoComponent implements OnInit {
     });
   }
 
-  verProyectosCANCEL(){
-    this.proyectoService.getProyectoCANCEL().subscribe(value=> {
+  verProyectosCANCEL() {
+    this.proyectoService.getProyectoCANCEL().subscribe((value) => {
       this.proyectoDataCANCEL = value;
       this.proyectoDataCANCEL = this.proyectoDataCANCEL.rows;
-    })
+    });
   }
 
   verProyectos() {
-    this.proyectoService.getProyectoCANCEL().subscribe((value) => {
+    this.proyectoService.getProyectoAll().subscribe((value) => {
       this.proyectoData = value;
       this.proyectoData = this.proyectoData.rows;
-      console.log(this.proyectoData)
-    })
+    });
   }
 
-  obtenerProyecto(IDproyecto: number){
-    this.proyectoService.seleccionar(IDproyecto).subscribe(value => {
-    this.proyectoData = value;
-    console.log(value);
-    this.proyectoData = this.proyectoData.rows;
-    this.actualizar = true;
-    console.log(this.proyectoData[0].IDproyecto);
-    console.log(this.proyectoData[0].nombre);
-    })
+  obtenerProyecto(IDproyecto: number) {
+    this.proyectoService.seleccionar(IDproyecto).subscribe((value) => {
+      this.proyectoData = value;
+      this.proyectoData = this.proyectoData.rows;
+      this.actualizar = true;
+    });
   }
 
-  obtenerProyectoCANCEL(IDproyecto: number){
-    this.proyectoService.seleccionar(IDproyecto).subscribe(value => {
-    this.proyectoDataCANCEL = value;
-    console.log(value);
-    this.proyectoDataCANCEL = this.proyectoDataCANCEL.rows;
-    this.actualizar2 = true;
-    console.log(this.proyectoDataCANCEL[0].IDproyecto);
-    console.log(this.proyectoDataCANCEL[0].nombre);
-    })
+  obtenerProyectoCANCEL(IDproyecto: number) {
+    this.proyectoService.seleccionar(IDproyecto).subscribe((value) => {
+      this.proyectoDataCANCEL = value;
+      this.proyectoDataCANCEL = this.proyectoDataCANCEL.rows;
+      this.actualizar2 = true;
+    });
   }
 
-  volver(){
+  volver() {
     window.location.reload();
   }
 
-  modificarProyecto(){
-    this.proyectoEdit = this.formProyectoEdit.value
+  modificarProyecto() {
+    this.proyectoEdit = this.formProyectoEdit.value;
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -135,22 +142,22 @@ export class EliminarProyectoComponent implements OnInit {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          this.proyectoService.putProyecto(this.proyectoData[0].IDproyecto, this.proyectoEdit)
-          .subscribe((value) => {
-            console.log(this.proyectoEdit);
-            this.msg = value;
-            window.location.reload();
-            if (this.msg.err == false) {
-              swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
-              this.ngOnInit();
-            }
-          });
+          this.proyectoService
+            .putProyecto(this.proyectoData[0].IDproyecto, this.proyectoEdit)
+            .subscribe((value) => {
+              this.msg = value;
+              window.location.reload();
+              if (this.msg.err == false) {
+                swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
+                this.ngOnInit();
+              }
+            });
         }
-    })
+      });
   }
 
-  modificarProyectoCANCEL(){
-    this.proyectoEdit2 = this.proyectoDataCANCEL.value
+  modificarProyectoCANCEL() {
+    this.proyectoEdit2 = this.proyectoDataCANCEL.value;
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -169,22 +176,24 @@ export class EliminarProyectoComponent implements OnInit {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          this.proyectoService.putProyectoCANCEL(this.proyectoDataCANCEL[0].IDproyecto, this.proyectoEdit2)
-          .subscribe((value) => {
-            console.log(this.proyectoEdit2);
-            this.msg = value;
-            window.location.reload();
-            if (this.msg.err == false) {
-              swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
-              this.ngOnInit();
-            }
-          });
+          this.proyectoService
+            .putProyectoCANCEL(
+              this.proyectoDataCANCEL[0].IDproyecto,
+              this.proyectoEdit2
+            )
+            .subscribe((value) => {
+              this.msg = value;
+              window.location.reload();
+              if (this.msg.err == false) {
+                swalWithBootstrapButtons.fire(this.msg.msg, '', 'success');
+                this.ngOnInit();
+              }
+            });
         }
-    })
+      });
   }
 
-
-  deleteProyecto(IDproyecto: number){
+  deleteProyecto(IDproyecto: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

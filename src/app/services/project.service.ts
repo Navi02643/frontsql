@@ -3,55 +3,53 @@ import { HttpClient } from '@angular/common/http';
 import { ProyectoModel } from '../models/proyecto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
-
   url = 'http://localhost:5000/api/proyectos';
   url2 = 'http://localhost:5000/api/estados';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getProyectoAll(){
-    return this.http.get(this.url)
+  getProyectoAll() {
+    return this.http.get(this.url);
   }
 
-  getProyectoCANCEL(){
-    return this.http.get(`${this.url}/cancel`)
+  getProyectoCANCEL() {
+    return this.http.get(`${this.url}/cancel`);
   }
 
-  getProyectoUSER(IDusuario: any){
-    return this.http.get(`${this.url}/usuario?IDusuario=${IDusuario}`)
+  getProyectoUSER(IDusuario: any) {
+    return this.http.get(`${this.url}/usuario?IDusuario=${IDusuario}`);
   }
 
-  getProyectoESP(IDproyecto: any){
-    return this.http.get(`${this.url}/proyecto?IDproyecto=${IDproyecto}`)
-  }
-
-  seleccionar(IDproyecto: any){
+  getProyectoESP(IDproyecto: any) {
     return this.http.get(`${this.url}/proyecto?IDproyecto=${IDproyecto}`);
   }
 
-  postProyecto(proyecto: ProyectoModel){
+  seleccionar(IDproyecto: any) {
+    return this.http.get(`${this.url}/proyecto?IDproyecto=${IDproyecto}`);
+  }
+
+  postProyecto(proyecto: ProyectoModel) {
     return this.http.post(this.url, proyecto);
   }
 
-  putProyecto(IDproyecto: any, proyecto: ProyectoModel){
+  putProyecto(IDproyecto: any, proyecto: ProyectoModel) {
     return this.http.put(`${this.url}?IDproyecto=${IDproyecto}`, proyecto);
   }
 
-  putProyectoCANCEL(IDproyecto: any, proyecto: ProyectoModel){
+  putProyectoCANCEL(IDproyecto: any, proyecto: ProyectoModel) {
     return this.http.put(`${this.url}/reac?IDproyecto=${IDproyecto}`, proyecto);
   }
 
-  deleteProyecto(IDproyecto: any){
+  deleteProyecto(IDproyecto: any) {
     return this.http.delete(`${this.url}?IDproyecto=${IDproyecto}`);
   }
 
   //////////////////////////SERVICIO UNICAMENTE PARA TRAER LOS ESTADOS DE LOS PROYECTOS/////////////////////
 
-  getStatus(){
+  getStatus() {
     return this.http.get(this.url2);
   }
-
 }

@@ -1,48 +1,55 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, NumberValueAccessor, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tareas } from 'src/app/models/tareas';
+import { AuthService } from 'src/app/services/auth.service';
 import { TareasService } from 'src/app/services/tarea.service';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-editar-tarea',
   templateUrl: './editar-tarea.component.html',
-  styleUrls: ['./editar-tarea.component.css']
+  styleUrls: ['./editar-tarea.component.css'],
 })
 export class EditarTareaComponent implements OnInit {
-
-
   message: any = '';
   FormEditTarea: FormGroup;
-  IDtareas  = Number(localStorage.getItem('IDtareas'));
-
-
-  // IDtareas: number;
-  // Tareas: tareas;
+  IDtareas = Number(localStorage.getItem('IDtareas'));
+  IDusuarioVD = localStorage.getItem('ID');
+  IDrolVD = Number(localStorage.getItem('ROL'));
+  IDcargo = Number(localStorage.getItem('CARGO'));
 
   TareasInfo: any = {
-    IDusuario: "",
-    tareanombre: "",
-    tareadescripcion: "",
-    tareafechaf: "",
+    IDusuario: '',
+    tareanombre: '',
+    tareadescripcion: '',
+    tareafechaf: '',
   };
 
   constructor(
     private tareasS: TareasService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getTareas();
     this.createform();
-    console.log(this.IDtareas)
+    this.validardatos();
   }
 
+  validardatos() {
+    if (this.IDusuarioVD == null || this.IDrolVD != 1 || this.IDcargo != 7) {
+      this.authservice.logout();
+      this.router.navigate(['/auth/login']);
+    }
+  }
   getTareas() {
-    return this.tareasS.getTareasAll().subscribe(value => {
+    return this.tareasS.getTareasAll().subscribe((value) => {
       this.TareasInfo = value;
       this.TareasInfo = this.TareasInfo.rows;
     });
@@ -57,13 +64,8 @@ export class EditarTareaComponent implements OnInit {
   }
 
   confirmUpdateTareas() {
-    // this.IDtareas = this.route.snapshot.params['IDtareas'];
-    // this.tareasS.getTareaById(this.IDtareas).subscribe(value => {
-    //   this.Tareas;
-    //   console.log('Update:', value)
-    // })
     this.TareasInfo = this.FormEditTarea.value;
-    this.tareasS
+    this.tareasS;
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -88,8 +90,12 @@ export class EditarTareaComponent implements OnInit {
             .subscribe((value) => {
               this.message = value;
               if (this.message.err == false) {
-                swalWithBootstrapButtons.fire(this.message.message, 'Se ha ha modificado la tarea satisfactoriamente.', 'success');
-                localStorage.removeItem("IDtareas")
+                swalWithBootstrapButtons.fire(
+                  this.message.message,
+                  'Se ha ha modificado la tarea satisfactoriamente.',
+                  'success'
+                );
+                localStorage.removeItem('IDtareas');
                 this.router.navigate(['tareasLayout']);
               }
             });
