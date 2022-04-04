@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -8,10 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-eliminar-proyecto',
   templateUrl: './eliminar-proyecto.component.html',
-  styleUrls: ['./eliminar-proyecto.component.css']
+  styleUrls: ['./eliminar-proyecto.component.css'],
 })
 export class EliminarProyectoComponent implements OnInit {
-
   msg: any = '';
   usuarios: any = [];
   estados: any = [];
@@ -22,18 +22,18 @@ export class EliminarProyectoComponent implements OnInit {
 
   actualizar: boolean = false
   actualizar2: boolean = false
-  
+
   IDproyecto: any= "";
   proyectoEdit: any = [];
   proyectoEdit2: any = [];
- 
 
-  proyectoData: any={
-    IDproyecto: "",
-    proyectonombre: "",
-    proyectodescripcion: "",
-    nombreestatus: "",
-    nombre: "",
+
+  proyectoData: any = {
+    IDproyecto: '',
+    proyectonombre: '',
+    proyectodescripcion: '',
+    nombreestatus: '',
+    nombre: '',
   };
 
   proyectoDataCANCEL: any={
@@ -81,8 +81,8 @@ export class EliminarProyectoComponent implements OnInit {
     })
   }
 
-  verProyectos(){
-    this.proyectoService.getProyectoAll().subscribe(value=> {
+  verProyectos() {
+    this.proyectoService.getProyectoCANCEL().subscribe((value) => {
       this.proyectoData = value;
       this.proyectoData = this.proyectoData.rows;
       console.log(this.proyectoData)
@@ -110,7 +110,7 @@ export class EliminarProyectoComponent implements OnInit {
     console.log(this.proyectoDataCANCEL[0].nombre);
     })
   }
-  
+
   volver(){
     window.location.reload();
   }
@@ -211,8 +211,6 @@ export class EliminarProyectoComponent implements OnInit {
             }
           });
         }
-    })
+      });
   }
-  
-
 }

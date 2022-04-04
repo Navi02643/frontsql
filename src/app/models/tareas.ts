@@ -1,7 +1,9 @@
+// MODEL TAREAS:
 export interface tareas {
-        IDtarea: number,
-        nombre: string,
-        descripcion: string,
-        proyecto: string,
-        fecha_finalizacion: string,
-    }
+    IDproyecto: number,
+    IDusuario: number,
+    IDestado: number,
+    tareanombre: string,
+    tareadescripcion: string,
+    tareafechaf: string
+}

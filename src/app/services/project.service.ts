@@ -20,6 +20,14 @@ export class ProjectService {
     return this.http.get(`${this.url}/cancel`)
   }
 
+  getProyectoUSER(IDusuario: any){
+    return this.http.get(`${this.url}/usuario?IDusuario=${IDusuario}`)
+  }
+
+  getProyectoESP(IDproyecto: any){
+    return this.http.get(`${this.url}/proyecto?IDproyecto=${IDproyecto}`)
+  }
+
   seleccionar(IDproyecto: any){
     return this.http.get(`${this.url}/proyecto?IDproyecto=${IDproyecto}`);
   }

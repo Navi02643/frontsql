@@ -46,7 +46,7 @@
             <input type="text" id="proyectonombre" formControlName="proyectonombre" ngModel="{{this.proyectoData[0].proyectonombre}}" class="form-control">
             <label for="proyectonombre" class="form-label">Nombre del Proyecto</label>
           </div>
-  
+
           <div class="form-floating mb-3">
             <input type="text" formControlName="proyectodescripcion"  ngModel="{{this.proyectoData[0].proyectodescripcion}}" class="form-control">
             <label for="exampleInputDescripcion" class="form-label">Descripción</label>
@@ -57,23 +57,23 @@
              <select formControlName="IDusuario"  ngModel="{{this.proyectoData[0].nombre}}" class="form-select">
               <option *ngFor="let lista of usuarios.rows; count as c" ngValue="{{ lista.IDusuario }}">
                 {{ lista.IDusuario }}
-                {{ lista.usuarionombres }} 
+                {{ lista.usuarionombres }}
                 {{ lista.usuarioapellidoP }}
                 {{ lista.usuarioapellidoM }}
               </option>
-            </select> 
+            </select>
           </div>
 
           <div class=" mb-3">
             <label for="exampleInputNombre" class="form-label">Estado del Proyecto</label>
              <select formControlName="IDestado"  ngModel="{{this.proyectoData[0].nombreestatus}}" class="form-select">
               <option *ngFor="let lista2 of estados.rows; count as c" ngValue="{{ lista2.IDestado }}">
-                {{ lista2.nombreestatus }} 
+                {{ lista2.nombreestatus }}
               </option>
-            </select> 
+            </select>
           </div>
 
-    
+
 
           <hr>
           <div class="d-grid gap-2 col-6 mx-auto">

@@ -23,7 +23,7 @@ export class EliminarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.validardatos();
+    // this.validardatos();
     this.listaINA();
   }
 

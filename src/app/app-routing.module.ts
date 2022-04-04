@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditarTareaComponent } from './tareas/editar-tarea/editar-tarea.component';
-import { EliminarTareaComponent } from './tareas/eliminar-tarea/eliminar-tarea.component';
-import { RegistrarTareaComponent } from './tareas/registrar-tarea/registrar-tarea.component';
 import { EliminarusuarioComponent } from './components/user/eliminarusuario/eliminarusuario.component';
-import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component'
+import { ModificarcontrasenyaComponent } from './components/user/modificarcontrasenya/modificarcontrasenya.component';
 import { ModificarusuarioComponent } from './components/user/modificarusuario/modificarusuario.component';
 import { NavbarComponent } from 'src/app/components/header/navbar/navbar.component';
 import { ModificarcargorolComponent } from 'src/app/components/user/modificarcargorol/modificarcargorol.component';
@@ -13,12 +10,16 @@ import { RegistrarProyectoComponent } from './components/proyectos/registrar-pro
 import { EditarProyectoComponent } from './components/proyectos/editar-proyecto/editar-proyecto.component';
 import { EliminarProyectoComponent } from './components/proyectos/eliminar-proyecto/eliminar-proyecto.component';
 import { VerProyectoComponent } from './components/proyectos/ver-proyecto/ver-proyecto.component';
-import { DashboardComponent } from './components/home/dashboard/dashboard.component'
+import { TareasLayoutComponent } from './components/tareas/tareas-layout/tareas-layout.component';
+import { RegistrarTareaComponent } from './components/tareas/registrar-tarea/registrar-tarea.component';
+import { EliminarTareaComponent } from './components/tareas/eliminar-tarea/eliminar-tarea.component';
+import { EditarTareaComponent } from './components/tareas/editar-tarea/editar-tarea.component';
+import { ActualizarTareaComponent } from './components/tareas/actualizar-tarea/actualizar-tarea.component';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
   { path: 'auth', loadChildren: () => import ('./auth/auth.module').then(x => x.AuthModule) },
-  // { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'navbar',component: NavbarComponent,pathMatch: 'full' },
   { path: 'deleteuser',component: EliminarusuarioComponent,pathMatch: 'full' },
   { path: 'changepass',component: ModificarcontrasenyaComponent,pathMatch:'full' },
@@ -29,6 +30,8 @@ const routes: Routes = [
   {path: 'registrarTarea', component: RegistrarTareaComponent, pathMatch:'full'},
   {path: 'eliminarTarea', component: EliminarTareaComponent, pathMatch:'full'},
   {path: 'editarTarea', component: EditarTareaComponent, pathMatch:'full'},
+  {path: 'tareasLayout', component: TareasLayoutComponent, pathMatch:'full'},
+  {path: 'actualizarTarea', component: ActualizarTareaComponent, pathMatch:'full'},
   //MODULO PROYECTOS:
   {path: 'registrar-proyecto', component: RegistrarProyectoComponent, pathMatch:'full'},
   {path: 'editar-proyecto', component: EditarProyectoComponent, pathMatch:'full'},

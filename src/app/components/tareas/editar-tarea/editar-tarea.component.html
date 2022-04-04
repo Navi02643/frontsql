@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row p-5">
+    <div class="col-3">
+
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <h5 class="card-header">
+          <h3><b>Editar Tarea:</b></h3>
+        </h5>
+        <div class="card-body">
+          <form [formGroup]="FormEditTarea">
+            <div class="mb-3">
+              <label for="tareanombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="tareanombre" formControlName="tareanombre"
+                placeholder="{{ this.TareasInfo.proyectonombre }}" />
+              <span class="alert alert-danger" *ngIf="
+            this.FormEditTarea
+              .get('tareanombre')
+              ?.hasError('pattern') &&
+            this.FormEditTarea.get('tareanombre')?.touched
+          ">Ingresaste un número y no esta permitido.</span>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="tareadescripcion" class="form-label">Descripción:</label>
+              <input type="text" class="form-control" id="tareadescripcion" formControlName="tareadescripcion"
+                placeholder="{{ this.TareasInfo.tareadescripcion }}" />
+              <span class="alert alert-danger" *ngIf="
+            this.FormEditTarea
+              .get('tareadescripcion')
+              ?.hasError('pattern') &&
+            this.FormEditTarea.get('tareadescripcion')?.touched
+          ">Ingresaste un número y no esta permitido.</span>
+            </div>
+
+
+            <!-- <div class="mb-3">
+                        <input type="text" class="form-control" id="proyectoTarea" placeholder="Proyecto">
+                      </div> -->
+            <div class="mb-3">
+              <label for="tareafechaf" class="form-label">Fecha de finalización:</label>
+              <input type="date" class="form-control" id="tareafechaf" formControlName="tareafechaf"
+                placeholder="{{ this.TareasInfo.tareafechaf }}" aria-describedby="tareafechafhelp" />
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-outline-success btn-lg" value="Confirmar" [disabled]="!FormEditTarea.valid"
+                (click)="confirmUpdateTareas()">Guardar cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

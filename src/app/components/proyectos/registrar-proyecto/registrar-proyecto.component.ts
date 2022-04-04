@@ -28,6 +28,7 @@ export class RegistrarProyectoComponent implements OnInit {
   crearProyecto(form: { value: any; }):void {
     this.proyectoService.postProyecto(form.value).subscribe(res => {
       Swal.fire({
+        showCloseButton: true,
         icon: 'success',
         title: 'Ready!',
         text: 'Proyecto creado exitosamente',

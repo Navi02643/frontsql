@@ -1,15 +1,80 @@
 <app-navbar></app-navbar>
-<div class="jumbrotron">
+<div class="jumbrotron pt-3">
   <div class="container">
-  <div class="row">
-    <div class="col-4">
-      <h1>Proyectos</h1>
-
-    </div>
-    <div class="col-8">
-      <h1>Tareas</h1>
+    <div class="row">
+      <div class="col-4">
+        <h1>Proyectos</h1>
+        <ul class="list-group">
+          <button
+            class="list-group-item"
+            (click)="obtenertareasproyecto(proyecto.IDproyecto)"
+            *ngFor="let proyecto of listaproyectos; count as C"
+          >
+            {{ proyecto.proyectonombre }}
+          </button>
+        </ul>
+      </div>
+      <div class="col-8">
+        <h1>
+          Tareas
+          <span *ngIf="this.proyectonombretarea.length != 0">
+            De {{ this.proyectonombretarea }}</span
+          >
+        </h1>
+        <div *ngIf="divamostras == 0">
+          <div>
+            <h3 class="border border-danger p-3" style="color: red">
+              Selecciona Un Proyecto
+            </h3>
+          </div>
+        </div>
+        <div *ngIf="divamostras == 1">
+          <div>
+            <h3 class="border border-danger p-3" style="color: red">
+              Sin Tareas En Este Proyecto
+            </h3>
+          </div>
+        </div>
+        <div *ngIf="divamostras == 2">
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Tarea</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Fecha de entrega</th>
+                <th scope="col">Estado Actual</th>
+                <th scope="col">Nuevo Estado</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let tarea of listatareas; count as C">
+              <tr>
+                <td>{{ tarea.tareanombre }}</td>
+                <td>{{ tarea.tareadescripcion }}</td>
+                <td>{{ tarea.FechaEntrega.slice(0, 10) }}</td>
+                <td>{{ tarea.nombreestatus }}</td>
+                <td>
+                  <form [formGroup]="formularioestado">
+                    <select
+                      class="form-select"
+                      name="estado"
+                      id="estado"
+                      formControlName="estado"
+                      (change)="obtenerrespuesta(tarea.IDtareas)"
+                    >
+                      <option
+                        ngValue="{{ estados.IDestado }}"
+                        *ngFor="let estados of listaestados"
+                      >
+                        {{ estados.nombreestatus }}
+                      </option>
+                    </select>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-
