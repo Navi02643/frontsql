@@ -1,4 +1,4 @@
 export interface UserRC {
-  IDcargo: string,
-  IDrol: string,
+  IDcargo: string;
+  IDrol: string;
 }

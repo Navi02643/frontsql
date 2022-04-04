@@ -1,5 +1,5 @@
 export interface UserP {
-  usuariocontrasenyaold: string,
-  usuariocontrasenyanew: string,
-  usuariocontrasenyaconf: string
+  usuariocontrasenyaold: string;
+  usuariocontrasenyanew: string;
+  usuariocontrasenyaconf: string;
 }

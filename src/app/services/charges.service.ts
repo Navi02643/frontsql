@@ -2,15 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChargesService {
-
   url = 'http://localhost:5000/api/cargos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getcargosACT(){
-    return this.http.get(`${this.url}`)
+  getcargosACT() {
+    return this.http.get(`${this.url}`);
   }
 }

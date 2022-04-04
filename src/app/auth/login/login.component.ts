@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   onLogin(form: { value: any; }): void {
     this.authService.login(form.value).subscribe(res => {
       if(res!=null) {
-        this.router.navigateByUrl('/navbar')
+        this.router.navigateByUrl('/inicio')
       } else {
         Swal.fire({
           icon: 'error',

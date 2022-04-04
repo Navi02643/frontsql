@@ -14,12 +14,12 @@ export class ModificarusuarioComponent implements OnInit {
   IDusuario = localStorage.getItem('ID');
   editvalue: any = [];
   formulariousuarioedit: FormGroup;
-  userdata: any={
-    usuarionombres: "",
-    usuarioapellidoP: "",
-    usuarioapellidoM: "",
-    usuarioemail: "",
-    usuariotelefono: "",
+  userdata: any = {
+    usuarionombres: '',
+    usuarioapellidoP: '',
+    usuarioapellidoM: '',
+    usuarioemail: '',
+    usuariotelefono: '',
   };
   msg: any = '';
 
@@ -31,11 +31,11 @@ export class ModificarusuarioComponent implements OnInit {
     this.data();
   }
 
-  data(){
-    this.userservice.getuseresp(this.IDusuario).subscribe(value=>{
+  data() {
+    this.userservice.getuseresp(this.IDusuario).subscribe((value) => {
       this.userdata = value;
-      this.userdata =  this.userdata.rows;
-    })
+      this.userdata = this.userdata.rows;
+    });
   }
 
   validardatos() {

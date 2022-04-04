@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { switchAll } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChargesService } from 'src/app/services/charges.service';
 import { RolesService } from 'src/app/services/roles.service';
@@ -16,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class AltausuarioComponent implements OnInit {
   IDusuario = localStorage.getItem('ID');
-  IDrolLS = Number(localStorage.getItem('CARGO'));
+  IDrolLS = Number(localStorage.getItem('ROL'));
   formulariouser: FormGroup;
   registro: any = [];
   listaroles: any = [];

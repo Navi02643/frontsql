@@ -38,7 +38,7 @@
           name="IDcargo"
           id="IDcargo"
           formControlName="IDcargo"
-          ngModel="{{this.userdata.IDcargo}}"
+          ngModel="{{ this.userdata.IDcargo }}"
         >
           <option
             *ngFor="let lista of listacargos.rows; count as c"
@@ -55,7 +55,7 @@
           name="IDrol"
           id="IDrol"
           formControlName="IDrol"
-          ngModel="{{this.userdata.IDrol}}"
+          ngModel="{{ this.userdata.IDrol }}"
         >
           <option
             *ngFor="let lista of listaroles.rows; count as c"
@@ -72,7 +72,7 @@
           class="form-control"
           id="usuariosalario"
           formControlName="usuariosalario"
-          placeholder="{{this.userdata.usuariosalario}}"
+          placeholder="{{ this.userdata.usuariosalario }}"
         />
       </div>
       <div class="mb-3">
@@ -82,7 +82,7 @@
           name="usuarioestado"
           id="usuarioestado"
           formControlName="usuarioestado"
-          ngModel="{{this.userdata.usuarioestado}}"
+          ngModel="{{ this.userdata.usuarioestado }}"
         >
           <option ngValue="1">Activo</option>
           <option ngValue="0">Inactivo</option>
@@ -102,4 +102,3 @@
 </div>
 
 <router-outlet></router-outlet>
-

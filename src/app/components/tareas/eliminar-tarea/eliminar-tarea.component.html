@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <div class="row p-5">
+    <div class="col-12">
+      <div class="card">
+        <h5 class="card-header">
+          <h3><b>Tareas:</b></h3>
+        </h5>
+        <div class="card-body">
+          <table class="table table-dark table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Proyecto</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Fecha entrega</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tarea of TareasInfo">
+                <td>{{ tarea.IDtareas }}</td>
+                <th scope="row">{{ tarea.tareanombre }}</th>
+                <td>{{ tarea.tareadescripcion }}</td>
+                <td>{{ tarea.proyectonombre }}</td>
+                <td>{{ tarea.usuario }}</td>
+                <td>{{ tarea.FechaEntrega.slice(0, 10) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
