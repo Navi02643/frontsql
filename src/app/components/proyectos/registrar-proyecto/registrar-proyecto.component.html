@@ -3,34 +3,64 @@
 <div class="container">
     <div class="card mb-3">
       <div class="card-body">
-        <form #frmProyecto="ngForm" class="login-container" (ngSubmit)="crearProyecto(frmProyecto)">
+        <form [formGroup]="formProyecto" class="login-container">
             <h3 class="card-header">Crear Proyecto</h3>
           <div class="form-floating mb-3">
-            <input type="text" name="proyectonombre" class="form-control" ngModel required>
+            <input type="text" formControlName="proyectonombre" class="form-control" ngModel required>
             <label for="exampleInputNombre" class="form-label">Nombre del Proyecto</label>
+            <span
+            class="alert alert-danger"
+              *ngIf="
+                this.formProyecto
+                  .get('proyectonombre')
+                  ?.hasError('pattern') &&
+                this.formProyecto.get('proyectonombre')?.touched
+              "
+              >Este campo no acepta datos numericos</span
+            >
           </div>
-  
+
           <div class="form-floating mb-3">
-            <input type="text" name="proyectodescripcion" class="form-control" ngModel required>
+            <input type="text" formControlName="proyectodescripcion" class="form-control" ngModel required>
             <label for="exampleInputDescripcion" class="form-label">Descripción</label>
+            <span
+            class="alert alert-danger"
+              *ngIf="
+                this.formProyecto
+                  .get('proyectodescripcion')
+                  ?.hasError('pattern') &&
+                this.formProyecto.get('proyectodescripcion')?.touched
+              "
+              >Este campo no acepta datos numericos</span
+            >
           </div>
 
           <div class=" mb-3">
             <label for="exampleInputNombre" class="form-label">Administrador del Proyecto</label>
-             <select type="number" name="IDusuario" class="form-select" ngModel required>
+             <select type="number" formControlName="IDusuario" class="form-select" ngModel required>
               <option selected>Ver Usuarios Disponibles</option>
               <option *ngFor="let lista of usuarios.rows; count as c" ngValue="{{ lista.IDusuario }}">
                 {{ lista.IDusuario }}
-                {{ lista.usuarionombres }} 
+                {{ lista.usuarionombres }}
                 {{ lista.usuarioapellidoP }}
                 {{ lista.usuarioapellidoM }}
               </option>
-            </select> 
+            </select>
+            <span
+            class="alert alert-danger"
+              *ngIf="
+                this.formProyecto
+                  .get('IDusuario')
+                  ?.hasError('required') &&
+                this.formProyecto.get('IDusuario')?.touched
+              "
+              >Se necesita seleccionar un Administrador para el proyecto</span
+            >
           </div>
 
           <hr>
           <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="submit" value="Send" class="btn btn-dark">Crear Nuevo Proyecto</button>
+          <button [disabled]="!formProyecto.valid" type="submit" value="Send" class="btn btn-dark" (click)="crearProyecto(formProyecto)">Crear Nuevo Proyecto</button>
           </div>
         </form>
       </div>
